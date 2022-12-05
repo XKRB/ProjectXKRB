@@ -11,45 +11,45 @@ namespace API.Models
         /// <summary>
         /// Product Id
         /// </summary>
-        private int _id;
+        private int _idProduct;
 
         /// <summary>
         /// Product Name
         /// </summary>
-        private string _Name;
+        private string _productName;
 
         /// <summary>
         /// Product price
         /// </summary>
-        private int _price;
+        private int _productPrice;
 
 
         /// <summary>
         /// Product Id
         /// </summary>
-        public int id { get => _id; set { _id= value; } }
+        public int IdProduct { get => _idProduct; set { _idProduct = value; } }
 
         /// <summary>
         /// Product Name
         /// </summary>
-        public string Name { get => _Name; set { _Name= value; } }
+        public string ProductName { get => _productName; set { _productName = value; } }
 
         /// <summary>
         /// Product price
         /// </summary>
-        public int price { get => _price; set { _price= value; } }
+        public int ProductPrice { get => _productPrice; set { _productPrice = value; } }
 
         /// <summary>
         /// Constructor 
         /// </summary>
-        /// <param name="id">Product´s ID</param>
-        /// /// <param name="name">Product's name</param>
-        /// /// <param name="price">Product´s price</param>
-        public ProductModel(int id, string name, int price)
+        /// <param name="idProduct">Product´s ID</param>
+        /// /// <param name="productName">Product's name</param>
+        /// /// <param name="productPrice">Product´s price</param>
+        public ProductModel(int idProduct, string productName, int productPrice)
         {
-            _id = id;
-            _Name= name;
-            _price = price;
+            _idProduct = idProduct;
+            _productName = productName;
+            _productPrice = productPrice;
         }
     }
 }
