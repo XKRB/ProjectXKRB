@@ -1,5 +1,4 @@
 ﻿using API.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace API.Context.EntityConfiguration

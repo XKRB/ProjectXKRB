@@ -1,8 +1,5 @@
 using API.Context.Context;
-using API.Services.Clases;
 using Microsoft.EntityFrameworkCore;
-using Npgsql;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 

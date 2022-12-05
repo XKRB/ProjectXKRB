@@ -1,11 +1,9 @@
 ﻿using Azure.Core;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using System.Net;
 
 namespace API.General.Classes
 {
-    public class APIException: ApplicationException
+    public class APIException : ApplicationException
     {
         /// <summary>
         /// Message id

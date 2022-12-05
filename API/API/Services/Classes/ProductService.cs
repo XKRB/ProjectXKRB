@@ -1,7 +1,6 @@
 ﻿using API.General.InputOutputStructures.Products;
 using API.Models;
 using API.Repositories.Interfaces;
-using API.Services.Interfaces;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -34,7 +33,7 @@ namespace API.Services.Clases
         {
             ProductModel product = await _productRepository.GetProduct(idProduct);
 
-            GetProductOutput productOutput = new GetProductOutput() { IdProduct = product.IdProduct};
+            GetProductOutput productOutput = new GetProductOutput() { IdProduct = product.IdProduct };
 
             return productOutput;
         }
@@ -59,7 +58,7 @@ namespace API.Services.Clases
         /// <returns> Task </returns>
         public async Task IUpdateProduct(UpdateProductInput updateProduct)
         {
-            _product =await _productRepository.GetProduct(updateProduct.IdProduct);
+            _product = await _productRepository.GetProduct(updateProduct.IdProduct);
 
             _product.IdProduct = updateProduct.IdProduct;
             _product.ProductName = updateProduct.ProductName;

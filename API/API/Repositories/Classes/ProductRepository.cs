@@ -1,11 +1,8 @@
 ﻿
 using API.Context.Context;
-using API.General.Classes;
 using API.Models;
 using API.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using System.Net;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -15,7 +12,7 @@ namespace API.Repositories.Classes
     /// <summary>
     /// To manage product database data
     /// </summary>
-    public class ProductRepository :IProductRepository
+    public class ProductRepository : IProductRepository
     {
         /// <summary>
         /// To query product's tables
@@ -49,7 +46,7 @@ namespace API.Repositories.Classes
         public async Task<ProductModel> CreateProduct(ProductModel idProduct)
         {
             //We can,t have two products with the same idProduct
-            if (await _productContext.Products.CountAsync(products => products.IdProduct == idProduct.IdProduct)== 0)
+            if (await _productContext.Products.CountAsync(products => products.IdProduct == idProduct.IdProduct) == 0)
             {
                 _productContext.Products.Add(idProduct);
                 await _productContext.SaveChangesAsync();

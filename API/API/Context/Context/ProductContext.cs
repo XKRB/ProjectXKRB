@@ -1,5 +1,4 @@
-﻿using API.Context.EntityConfiguration;
-using API.Models;
+﻿using API.Models;
 using Microsoft.EntityFrameworkCore;
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB

@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
+﻿using API.Context.Context;
 using API.Services.Clases;
-using API.Context.Context;
 using API.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -14,17 +13,17 @@ namespace API.Controllers
     /// </summary>
     [Route("/products")]
     [ApiController]
-    public class ProductController:ControllerBase
+    public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
 
         private readonly ProductContext _context;
-        
-        
+
+
         /// <summary>
         /// Get product data
         /// </summary>
-        
+
         [HttpGet]
         public async Task<ActionResult<ProductService>> GetProductItem(int id)
         {
@@ -36,7 +35,7 @@ namespace API.Controllers
             //}
             //return productService;
 
-           return null;
+            return null;
         }
 
         /// <summary>
@@ -88,7 +87,7 @@ namespace API.Controllers
 
         }
 
-        
+
         private bool ProductExists(int id)
         {
             //return _context.ProductItems.Any(x => x.Id == id);

@@ -1,6 +1,5 @@
 ﻿using API.General.InputOutputStructures.Products;
 using API.Models;
-using Microsoft.CodeAnalysis;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -41,7 +40,7 @@ namespace API.Services.Interfaces
         /// <param name="productname"> product name </param>
         /// <param name="productPrice"> product price </param>
         /// <returns> list of prodcut Id, product name and product price </returns>
-        Task<List<GetProductOutput>> IGetAllProduct(int idProduct, string productname,int productPrice);
+        Task<List<GetProductOutput>> IGetAllProduct(int idProduct, string productname, int productPrice);
 
         ///// <summary>
         ///// Delete User
