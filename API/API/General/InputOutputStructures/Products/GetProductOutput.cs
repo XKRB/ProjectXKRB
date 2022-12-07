@@ -1,20 +1,19 @@
-﻿namespace API.General.InputOutputStructures.Products
+﻿namespace API.General.InputOutputStructures.Products;
+
+public class GetProductOutput
 {
-    public class GetProductOutput
-    {
-        /// <summary>
-        /// Product Id
-        /// </summary>
-        public int IdProduct;
+    /// <summary>
+    /// Product Id
+    /// </summary>
+    public int IdProduct;
 
-        /// <summary>
-        /// Product Name
-        /// </summary>
-        public string ProductName;
+    /// <summary>
+    /// Product Name
+    /// </summary>
+    public string? ProductName;
 
-        /// <summary>
-        /// Product Price
-        /// </summary>
-        public int ProductPrice;
-    }
+    /// <summary>
+    /// Product Price
+    /// </summary>
+    public int ProductPrice;
 }
