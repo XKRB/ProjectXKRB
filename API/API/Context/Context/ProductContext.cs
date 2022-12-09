@@ -1,4 +1,5 @@
-﻿using API.Models;
+﻿using API.Context.EntityConfiguration;
+using API.Models;
 using Microsoft.EntityFrameworkCore;
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -26,7 +27,7 @@ public class ProductContext : DbContext
     /// <param name="modelBuilder"> define entities</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //modelBuilder.ApplyConfiguration(new ProductsEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new ProductsEntityTypeConfiguration());
     }
 
     /// <summary>

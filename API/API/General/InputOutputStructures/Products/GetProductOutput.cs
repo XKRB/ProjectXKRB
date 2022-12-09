@@ -10,7 +10,7 @@ public class GetProductOutput
     /// <summary>
     /// Product Name
     /// </summary>
-    public string? ProductName;
+    public string ProductName;
 
     /// <summary>
     /// Product Price

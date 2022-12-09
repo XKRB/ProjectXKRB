@@ -1,9 +1,12 @@
 ﻿using API.Context.Context;
+using API.General.Classes;
 using API.General.InputOutputStructures.Products;
 using API.Services.Classes;
 using API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.Extensions.Localization;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -28,18 +31,32 @@ public class ProductController : ControllerBase
     /// </summary>
 
     [HttpGet]
-    public ActionResult<GetProductOutput>? GetProductItem(int idProduct) =>
-        //ProductService productService = await _context.Products.FindAsync(idProduct);
+    public async Task<ActionResult<GetProductOutput>> GetProduct(int idProduct)
+    {
+        try
+        {
+            ProductService productService = await _productService.GetProduct(idProduct);
+        }
+        catch (Exception ax) 
+        {
+            return BadRequest(new Request { IdMessage = 31, Message = "Id incorrect" });
+        }
+    }
+    //public ActionResult<GetProductOutput>? GetProductItem(int idProduct)
+    //{
+    //    ProductService productService = await _context.Products.FindAsync(idProduct);
 
-        //if (productService == null)
-        //{
-        //    return NotFound();
-        //}
-        ////return productService;
+    //    if (productService == null)
+    //    {
+    //        return NotFound();
+    //    }
+    //    return productService;
+    //}
 
-        //return getActionResult(_productService.IGetProduct(idProduct));
 
-        null;
+    //return getActionResult(_productService.IGetProduct(idProduct));
+
+    //null;
 
     /// <summary>
     /// Post product data
