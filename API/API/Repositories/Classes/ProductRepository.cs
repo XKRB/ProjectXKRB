@@ -26,49 +26,44 @@ public class ProductRepository : IProductRepository
     /// <summary>
     /// Get product
     /// </summary>
-    /// <param name="idProduct">user name</param>¿
+    /// <param name="product">user name</param>¿
     /// <returns> Product </returns>
-    public async Task<ProductModel> GetProduct(int idProduct) => await _productContext.Products.FindAsync(idProduct);
+    public async Task<ProductModel> GetProduct(int product) => await _productContext.Products.FindAsync(product);
 
     /// <summary>
     /// Create product
     /// </summary>
-    /// <param name="idProduct">user entity</param>
+    /// <param name="product">user entity</param>
     /// <returns>user entity</returns>
-    public async Task<ProductModel> CreateProduct(ProductModel idProduct)
+    public async Task<ProductModel> CreateProduct(ProductModel product)
     {
-        ////We can,t have two products with the same idProduct
-        //if (await _productContext.Products.CountAsync(products => products.IdProduct == idProduct.IdProduct) == 0)
-        //{
-
-        //}
-        _ = _productContext.Products.Add(idProduct);
+        _ = _productContext.Products.Add(product);
         _ = await _productContext.SaveChangesAsync();
 
-        return idProduct;
+        return product;
 
     }
 
     /// <summary>
     /// Update product
     /// </summary>
-    /// <param name="idProduct">user entity</param>
+    /// <param name="product">user entity</param>
     /// <returns>user entity</returns>
-    public async Task<ProductModel> UpdateProduct(ProductModel idProduct)
+    public async Task<ProductModel> UpdateProduct(ProductModel product)
     {
-        _ = _productContext.Update(idProduct);
+        _ = _productContext.Update(product);
         _ = await _productContext.SaveChangesAsync();
 
-        return idProduct;
+        return product;
     }
 
     /// <summary>
     /// Delete product penanently
     /// </summary>
-    /// <param name="idProduct">User</param>
-    public async Task DeleteProduct(ProductModel productModel)
+    /// <param name="product">User</param>
+    public async Task DeleteProduct(ProductModel product)
     {
-        _ = _productContext.Products.Remove(productModel);
+        _ = _productContext.Products.Remove(product);
         _ = await _productContext.SaveChangesAsync();
 
     }

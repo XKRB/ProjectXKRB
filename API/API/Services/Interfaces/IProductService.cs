@@ -10,21 +10,21 @@ public interface IProductService
     /// <summary>
     /// Get Product Data
     /// </summary>
-    /// <param name="idProduct"> product id </param>
+    /// <param name="product"> product id </param>
     /// <returns> Product ID, Product Name and Product Price </returns>
-    Task<ProductModel> GetProduct(int idProduct);
+    Task<ProductModel> GetProduct(int product);
 
     /// <summary>
     /// Create Product
     /// </summary>
-    /// <param name="idProduct"> createProduct object </param>
-    Task<ProductModel> CreateProduct(ProductModel idProduct);
+    /// <param name="product"> createProduct object </param>
+    Task<ProductModel> CreateProduct(ProductModel product);
 
     /// <summary>
     /// Update Product
     /// </summary>
-    /// <param name="idProduct"> update product </param>
-    Task<ProductModel> UpdateProduct(ProductModel idProduct);
+    /// <param name="product"> update product </param>
+    Task<ProductModel> UpdateProduct(ProductModel product);
 
     /// <summary>
     /// Delete product permanently

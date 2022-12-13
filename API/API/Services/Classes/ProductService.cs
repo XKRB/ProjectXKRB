@@ -28,28 +28,28 @@ public class ProductService : IProductService
     /// <summary>
     /// Get product
     /// </summary>
-    /// <param name="idProduct"> product id </param>
+    /// <param name="product"> product id </param>
     /// <returns> product id, product name and product price </returns>
-    public async Task<ProductModel> GetProduct(int idProduct)
-    {
-        ProductModel product = await _productRepository.GetProduct(idProduct);
-        return product;
-    }
+    public async Task<ProductModel> GetProduct(int product) => await _productRepository.GetProduct(product);
+    //{
+    //    ProductModel product = await _productRepository.GetProduct(idProduct);
+    //    return product;
+    //}
     //await _productRepository.GetProduct(getProduct);
 
     /// <summary>
     /// Create product
     /// </summary>
-    /// <param name="createProduct"> CreateProductInput object </param>
-    public async Task<ProductModel> CreateProduct(ProductModel idProduct) => await _productRepository.CreateProduct(idProduct);
+    /// <param name="product"> CreateProductInput object </param>
+    public async Task<ProductModel> CreateProduct(ProductModel product) => await _productRepository.CreateProduct(product);
 
     /// <summary>
     /// Update product
     /// </summary>
-    /// <param name="updateProduct"> name and email </param>
+    /// <param name="product"> name and email </param>
     /// <returns> Task </returns>
-    public async Task<ProductModel> UpdateProduct(ProductModel idProduct) =>
-        await _productRepository.UpdateProduct(idProduct);
+    public async Task<ProductModel> UpdateProduct(ProductModel product) =>
+        await _productRepository.UpdateProduct(product);
 
     /// <summary>
     /// Delete product permanently

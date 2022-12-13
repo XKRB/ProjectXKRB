@@ -12,28 +12,28 @@ public interface IProductRepository
     /// <summary>
     /// Get product
     /// </summary>
-    /// <param name="idProduct"> product id </param>
+    /// <param name="product"> product id </param>
     /// <returns>Products</returns>
-    Task<ProductModel> GetProduct(int idProduct);
+    Task<ProductModel> GetProduct(int product);
 
     /// <summary>
     /// Create product
     /// </summary>
-    /// <param name="idProduct"> created product </param>
+    /// <param name="product"> created product </param>
     /// <returns> created product </returns>
-    Task<ProductModel> CreateProduct(ProductModel idProduct);
+    Task<ProductModel> CreateProduct(ProductModel product);
 
     /// <summary>
     /// Update product
     /// </summary>
-    /// <param name="idProduct"> updated product </param>
+    /// <param name="product"> updated product </param>
     /// <returns> updated product </returns>
-    Task<ProductModel> UpdateProduct(ProductModel idProduct);
+    Task<ProductModel> UpdateProduct(ProductModel product);
 
     /// <summary>
     /// Delete product penanently
     /// </summary>
-    /// <param name="productModel"> deleted product </param>
+    /// <param name="product"> deleted product </param>
     /// <returns>deleted product</returns>
-    Task DeleteProduct(ProductModel productModel);
+    Task DeleteProduct(ProductModel product);
 }
