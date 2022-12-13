@@ -33,7 +33,7 @@ public interface IProductRepository
     /// <summary>
     /// Delete product penanently
     /// </summary>
-    /// <param name="idProduct"> deleted product </param>
+    /// <param name="productModel"> deleted product </param>
     /// <returns>deleted product</returns>
-    Task DeleteUser(ProductModel idProduct);
+    Task DeleteProduct(ProductModel productModel);
 }

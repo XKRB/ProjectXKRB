@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.Extensions.Logging;
-using System.Net;
+﻿using System.Net;
 
 namespace API.General.Classes;
 
@@ -51,12 +49,12 @@ public class APIException : ApplicationException
     /// <param name="originalException">Exception that originated the controlled exception (default null)</param>
     /// <param name="logLevel">Determines in what category should the log classify it</param>
     /// <param name="extraInfo">Extra information for this particular exception</param>
-    public APIException(int idMessage, string message, HttpStatusCode statusCode = HttpStatusCode.BadRequest, Exception originalException = null, params string[] extraInfo)
+    public APIException(int idMessage, string message, HttpStatusCode statusCode = HttpStatusCode.BadRequest, Exception? originalException = null, params string[] extraInfo)
     {
         _idMessage = idMessage;
         //_statusCode = statusCode;
         _requestError = new Request { IdMessage = idMessage, Message = message };
 
-        Log(message, originalException, logLevel, extraInfo);
+        //Log(message, originalException, logLevel, extraInfo);
     }
 }

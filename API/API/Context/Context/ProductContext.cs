@@ -25,10 +25,7 @@ public class ProductContext : DbContext
     /// Apply entity type congigurations when the model is creating
     /// </summary>
     /// <param name="modelBuilder"> define entities</param>
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.ApplyConfiguration(new ProductsEntityTypeConfiguration());
-    }
+    protected override void OnModelCreating(ModelBuilder modelBuilder) => modelBuilder.ApplyConfiguration(new ProductsEntityTypeConfiguration());
 
     /// <summary>
     /// Enable Sensitive Data Logging

@@ -1,59 +1,34 @@
-﻿using API.General.InputOutputStructures.Products;
-using API.Models;
+﻿using API.Models;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
 // </summary>
-namespace API.Services.Interfaces
+namespace API.Services.Interfaces;
+
+public interface IProductService
 {
+    /// <summary>
+    /// Get Product Data
+    /// </summary>
+    /// <param name="idProduct"> product id </param>
+    /// <returns> Product ID, Product Name and Product Price </returns>
+    Task<ProductModel> GetProduct(int idProduct);
 
-    public interface IProductService
-    {
-        /// <summary>
-        /// Get Product Data
-        /// </summary>
-        /// <param name="idProduct"> product id </param>
-        /// <returns> Product ID, Product Name and Product Price </returns>
-        Task<GetProductOutput> GetProduct(int idProduct);
+    /// <summary>
+    /// Create Product
+    /// </summary>
+    /// <param name="idProduct"> createProduct object </param>
+    Task<ProductModel> CreateProduct(ProductModel idProduct);
 
-        /// <summary>
-        /// Create Product
-        /// </summary>
-        /// <param name="createProduct"> createProduct object </param>
-        Task<ProductModel> CreateProduct(CreateProductInput createProduct);
+    /// <summary>
+    /// Update Product
+    /// </summary>
+    /// <param name="idProduct"> update product </param>
+    Task<ProductModel> UpdateProduct(ProductModel idProduct);
 
-        /// <summary>
-        /// Update Product
-        /// </summary>
-        /// <param name="updateProduct"> update product </param>
-        Task UpdateProduct(UpdateProductInput updateProduct);
-
-        /// <summary>
-        /// Delete product permanently
-        /// </summary>
-        /// <param name="idProduct"> product id</param>
-        Task DeleteProduct(int idProduct);
-
-        /// <summary>
-        /// Get all products 
-        /// </summary>
-        /// <param name="idProduct"> product id </param>
-        /// <param name="productname"> product name </param>
-        /// <param name="productPrice"> product price </param>
-        /// <returns> list of prodcut Id, product name and product price </returns>
-        
-        //Task<List<GetProductOutput>> IGetAllProduct(int idProduct, string productname, int productPrice);
-
-        ///// <summary>
-        ///// Delete User
-        ///// </summary>
-        ///// <param name="idProduct"> product id </param>
-        //Task DisableProduct(int idProduct);
-
-        ///// <summary>
-        ///// Active user
-        ///// </summary>
-        ///// <param name="idProduct"> product id </param>
-        //Task ActiveUser(int idProduct);
-    }
+    /// <summary>
+    /// Delete product permanently
+    /// </summary>
+    /// <param name="idProduct"> product id</param>
+    Task DeleteProduct(int idProduct);
 }

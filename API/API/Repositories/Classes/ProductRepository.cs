@@ -2,7 +2,6 @@
 using API.Context.Context;
 using API.Models;
 using API.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -29,12 +28,8 @@ public class ProductRepository : IProductRepository
     /// </summary>
     /// <param name="idProduct">user name</param>¿
     /// <returns> Product </returns>
-    public async Task<ProductModel> GetProduct(int idProduct)
-    {
-        ProductModel productModel = await _productContext.Products.FindAsync(idProduct);
+    public async Task<ProductModel> GetProduct(int idProduct) => await _productContext.Products.FindAsync(idProduct);
 
-        return productModel;
-    }
     /// <summary>
     /// Create product
     /// </summary>
@@ -42,16 +37,16 @@ public class ProductRepository : IProductRepository
     /// <returns>user entity</returns>
     public async Task<ProductModel> CreateProduct(ProductModel idProduct)
     {
-        //We can,t have two products with the same idProduct
-        if (await _productContext.Products.CountAsync(products => products.IdProduct == idProduct.IdProduct) == 0)
-        {
-            _ = _productContext.Products.Add(idProduct);
-            _ = await _productContext.SaveChangesAsync();
+        ////We can,t have two products with the same idProduct
+        //if (await _productContext.Products.CountAsync(products => products.IdProduct == idProduct.IdProduct) == 0)
+        //{
 
-            return idProduct;
-        }
+        //}
+        _ = _productContext.Products.Add(idProduct);
+        _ = await _productContext.SaveChangesAsync();
 
-        return null;
+        return idProduct;
+
     }
 
     /// <summary>
@@ -71,10 +66,9 @@ public class ProductRepository : IProductRepository
     /// Delete product penanently
     /// </summary>
     /// <param name="idProduct">User</param>
-    /// <returns>Task</returns>
-    public async Task DeleteUser(ProductModel idProduct)
+    public async Task DeleteProduct(ProductModel productModel)
     {
-        _ = _productContext.Products.Remove(idProduct);
+        _ = _productContext.Products.Remove(productModel);
         _ = await _productContext.SaveChangesAsync();
 
     }

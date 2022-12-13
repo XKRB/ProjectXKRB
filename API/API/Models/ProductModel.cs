@@ -21,7 +21,7 @@ public class ProductModel
     /// <summary>
     /// Product price
     /// </summary>
-    private int _productPrice;
+    private double _productPrice;
 
     /// <summary>
     /// Product Id
@@ -36,7 +36,9 @@ public class ProductModel
     /// <summary>
     /// Product price
     /// </summary>
-    public int ProductPrice { get => _productPrice; set => _productPrice = value; }
+    public double ProductPrice { get => _productPrice; set => _productPrice = value; }
+
+    public ProductModel() { }
 
     /// <summary>
     /// Constructor 
@@ -44,7 +46,7 @@ public class ProductModel
     /// <param name="idProduct">Product´s ID</param>
     /// /// <param name="productName">Product's name</param>
     /// /// <param name="productPrice">Product´s price</param>
-    public ProductModel(int idProduct, string productName, int productPrice)
+    public ProductModel(int idProduct, string productName, double productPrice)
     {
         _idProduct = idProduct;
         _productName = productName;
