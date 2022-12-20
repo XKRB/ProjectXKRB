@@ -1,5 +1,6 @@
 ﻿
 using API.Context.Context;
+using API.General.Classes.Configure;
 using API.Models;
 using API.Repositories.Interfaces;
 
@@ -26,29 +27,27 @@ public class ProductRepository : IProductRepository
     /// <summary>
     /// Get product
     /// </summary>
-    /// <param name="product">user name</param>¿
+    /// <param name="product">get product</param>¿
     /// <returns> Product </returns>
     public async Task<ProductModel> GetProduct(int product) => await _productContext.Products.FindAsync(product);
 
     /// <summary>
     /// Create product
     /// </summary>
-    /// <param name="product">user entity</param>
-    /// <returns>user entity</returns>
+    /// <param name="product">create product</param>
+    /// <returns>create product</returns>
     public async Task<ProductModel> CreateProduct(ProductModel product)
     {
         _ = _productContext.Products.Add(product);
         _ = await _productContext.SaveChangesAsync();
-
         return product;
-
     }
 
     /// <summary>
     /// Update product
     /// </summary>
-    /// <param name="product">user entity</param>
-    /// <returns>user entity</returns>
+    /// <param name="product">product updated</param>
+    /// <returns>product updated</returns>
     public async Task<ProductModel> UpdateProduct(ProductModel product)
     {
         _ = _productContext.Update(product);
@@ -60,7 +59,8 @@ public class ProductRepository : IProductRepository
     /// <summary>
     /// Delete product penanently
     /// </summary>
-    /// <param name="product">User</param>
+    /// <param name="product">product deleted</param>
+    /// <returns>product deleted</returns>
     public async Task DeleteProduct(ProductModel product)
     {
         _ = _productContext.Products.Remove(product);

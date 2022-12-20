@@ -1,7 +1,11 @@
-﻿using API.Models;
+﻿using API.General.Classes;
+using API.General.Classes.Configure;
+using API.Models;
 using API.Services.Classes;
 using API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Plugins;
+using System.Net;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -29,32 +33,68 @@ public class ProductController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<ProductModel>> GetProduct(int idProduct)
     {
-        ProductModel product = await _productService.GetProduct(idProduct);
-        return product;
-        
+        try
+        {
+            ProductModel product = await _productService.GetProduct(idProduct);
+            return Ok(product);
+        }
+        catch (ExceptionClass ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     /// <summary>
     /// Post product data
     /// </summary>
     [HttpPost]
-    public async Task<ActionResult<ProductModel>> PostProduct(ProductModel idProduct) => await _productService.CreateProduct(idProduct);
+    public async Task<ActionResult<ProductModel>> PostProduct(ProductModel idProduct)
+    {
+        try
+        {
+            ProductModel product = await _productService.CreateProduct(idProduct);
+            return Ok(product);
+        }
+        catch (ExceptionClass ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 
     /// <summary>
     /// Put product data
     /// </summary>
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<ProductModel>> PutProduct(ProductModel idProduct) => await _productService.UpdateProduct(idProduct);
+    public async Task<ActionResult<ProductModel>> PutProduct(ProductModel idProduct)
+    {
+        try
+        {
+            ProductModel product = await _productService.UpdateProduct(idProduct);
+            return Ok(product);
+        }
+        catch (ExceptionClass ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+   
 
     /// <summary>
     /// Delete product data
     /// </summary>
     [HttpDelete("{idProduct}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> DeleteProduct(int idProduct) 
     {
-        await _productService.DeleteProduct(idProduct);
-
-        return Ok("The value was removed");
+        try
+        {
+            await _productService.DeleteProduct(idProduct);
+            return Ok("the product was deleted");
+        }
+        catch (ExceptionClass ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }

@@ -1,6 +1,9 @@
-﻿using API.Models;
+﻿using API.General.Classes.Configure;
+using API.Models;
 using API.Repositories.Interfaces;
 using API.Services.Interfaces;
+using MessagePack;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -30,30 +33,55 @@ public class ProductService : IProductService
     /// </summary>
     /// <param name="product"> product id </param>
     /// <returns> product id, product name and product price </returns>
-    public async Task<ProductModel> GetProduct(int product) => await _productRepository.GetProduct(product);
-    //{
-    //    ProductModel product = await _productRepository.GetProduct(idProduct);
-    //    return product;
-    //}
-    //await _productRepository.GetProduct(getProduct);
+    public async Task<ProductModel> GetProduct(int product)
+    {
+        ProductModel productModel = await _productRepository.GetProduct(product);
+        if (productModel == null)
+        {
+            throw new ExceptionClass("Product was not found");
+        }
+        else
+            return productModel;
+    }
 
     /// <summary>
     /// Create product
     /// </summary>
     /// <param name="product"> CreateProductInput object </param>
-    public async Task<ProductModel> CreateProduct(ProductModel product) => await _productRepository.CreateProduct(product);
+    public async Task<ProductModel> CreateProduct(ProductModel product) => await _productRepository.CreateProduct(new ProductModel { IdProduct = product.IdProduct });
+    //=> await _productRepository.CreateProduct(product);
+    //{
+    //    //ProductModel productModel = await _productRepository.GetProduct(product);
+
+    //    if (product != null)
+    //    {
+    //        throw new ExceptionClass("Product already exist");
+    //    }
+    //    else
+    //        return await _productRepository.CreateProduct(product);
+    //}
+
+
 
     /// <summary>
     /// Update product
     /// </summary>
     /// <param name="product"> name and email </param>
     /// <returns> Task </returns>
-    public async Task<ProductModel> UpdateProduct(ProductModel product) =>
-        await _productRepository.UpdateProduct(product);
+    public async Task<ProductModel> UpdateProduct(ProductModel product)
+    {
+        ProductModel productModel = await _productRepository.UpdateProduct(product);
+        if (productModel == null)
+        {
+            throw new ExceptionClass("Product does not exist, you can´t modify");
+        }
+        else
+            return productModel;
+    }
 
     /// <summary>
     /// Delete product permanently
     /// </summary>
-    /// <param name="idProduct">User name</param>
-    public async Task DeleteProduct(int idProduct) => await _productRepository.DeleteProduct(new ProductModel { IdProduct = idProduct });
+    /// <param name="product">User name</param>
+    public async Task DeleteProduct(int idProduct) => await _productRepository.DeleteProduct(new ProductModel { IdProduct = idProduct });  
 }

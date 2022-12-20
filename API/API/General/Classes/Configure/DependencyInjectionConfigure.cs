@@ -3,6 +3,9 @@ using API.Repositories.Interfaces;
 using API.Services.Classes;
 using API.Services.Interfaces;
 
+// <summary>
+// Developer....: Karla Ramos Benitez       USER ID: XKRB
+// </summary>
 namespace API.General.Classes.Configure;
 
 /// <summary>
