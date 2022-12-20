@@ -50,7 +50,7 @@ public class ProductRepository : IProductRepository
     /// <returns>product updated</returns>
     public async Task<ProductModel> UpdateProduct(ProductModel product)
     {
-        _ = _productContext.Update(product);
+        _ = _productContext.Products.Update(product);
         _ = await _productContext.SaveChangesAsync();
 
         return product;

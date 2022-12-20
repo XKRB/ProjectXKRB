@@ -65,7 +65,6 @@ public class ProductController : ControllerBase
     /// Put product data
     /// </summary>
     [HttpPut]
-    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<ProductModel>> PutProduct(ProductModel idProduct)
     {
         try

@@ -47,41 +47,38 @@ public class ProductService : IProductService
     /// <summary>
     /// Create product
     /// </summary>
-    /// <param name="product"> CreateProductInput object </param>
-    public async Task<ProductModel> CreateProduct(ProductModel product) => await _productRepository.CreateProduct(new ProductModel { IdProduct = product.IdProduct });
-    //=> await _productRepository.CreateProduct(product);
-    //{
-    //    //ProductModel productModel = await _productRepository.GetProduct(product);
-
-    //    if (product != null)
-    //    {
-    //        throw new ExceptionClass("Product already exist");
-    //    }
-    //    else
-    //        return await _productRepository.CreateProduct(product);
-    //}
-
-
+    /// <param name="product"> Create product </param>
+    public async Task<ProductModel> CreateProduct(ProductModel product)
+    {
+        ProductModel productModel = await _productRepository.GetProduct(product.IdProduct);
+        if(productModel != null)
+        {
+            throw new ExceptionClass("Product already exist");
+        }
+        else
+            await _productRepository.CreateProduct(product);
+            return product;
+    }
 
     /// <summary>
     /// Update product
     /// </summary>
-    /// <param name="product"> name and email </param>
-    /// <returns> Task </returns>
+    /// <param name="product"> Update product </param>
     public async Task<ProductModel> UpdateProduct(ProductModel product)
     {
-        ProductModel productModel = await _productRepository.UpdateProduct(product);
+        ProductModel productModel = await _productRepository.GetProduct(product.IdProduct);
         if (productModel == null)
         {
             throw new ExceptionClass("Product does not exist, you can´t modify");
         }
         else
-            return productModel;
+            await _productRepository.UpdateProduct(product);
+            return product;
     }
 
     /// <summary>
     /// Delete product permanently
     /// </summary>
-    /// <param name="product">User name</param>
+    /// <param name="idProduct"> Delete product</param>
     public async Task DeleteProduct(int idProduct) => await _productRepository.DeleteProduct(new ProductModel { IdProduct = idProduct });  
 }
