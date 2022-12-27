@@ -1,6 +1,6 @@
 ﻿namespace API.General.Classes.Configure;
 
-public class ExceptionClass: Exception
+public class ExceptionClass : Exception
 {
     private string _message;
 
@@ -10,6 +10,6 @@ public class ExceptionClass: Exception
     public ExceptionClass(string message)
         : base(message)
     {
-        _message= message;
+        _message = message;
     }
 }

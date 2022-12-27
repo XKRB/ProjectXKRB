@@ -15,14 +15,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Conection to data base
 string? connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnection");
 builder.Services.AddDbContext<ProductContext>(options => options.UseNpgsql(connectionString));
 
 /// <summary>
 /// This method gets called by the runtime. Use this method to add services to the container.
 /// </summary>
-
-//DependencyInjectionConfigure.ConfigureService();
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();

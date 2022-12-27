@@ -3,6 +3,7 @@ using API.Context.Context;
 using API.General.Classes.Configure;
 using API.Models;
 using API.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -50,10 +51,16 @@ public class ProductRepository : IProductRepository
     /// <returns>product updated</returns>
     public async Task<ProductModel> UpdateProduct(ProductModel product)
     {
-        _ = _productContext.Products.Update(product);
-        _ = await _productContext.SaveChangesAsync();
-
-        return product;
+        if (!await _productContext.Products.AnyAsync(x => x.IdProduct == product.IdProduct))
+        {
+            throw new ExceptionClass("Product does not exist, you can´t modify");
+        }
+        else
+        {
+            _productContext.Products.Update(product);
+            await _productContext.SaveChangesAsync();
+            return product;
+        }
     }
 
     /// <summary>
@@ -63,8 +70,14 @@ public class ProductRepository : IProductRepository
     /// <returns>product deleted</returns>
     public async Task DeleteProduct(ProductModel product)
     {
-        _ = _productContext.Products.Remove(product);
-        _ = await _productContext.SaveChangesAsync();
-
+        if(! await _productContext.Products.AnyAsync(x => x.IdProduct == product.IdProduct))
+        {
+            throw new ExceptionClass("Product does not exist, you can´t eliminate");
+        }
+        else
+        {
+            _productContext.Products.Remove(product);
+            await _productContext.SaveChangesAsync();
+        }
     }
 }
