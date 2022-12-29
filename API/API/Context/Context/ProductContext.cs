@@ -17,6 +17,9 @@ public class ProductContext : DbContext
     /// </summary>
     public DbSet<ProductModel> Products { get; set; }
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
     public ProductContext(DbContextOptions<ProductContext> options) : base(options)
     {
     }
@@ -26,10 +29,4 @@ public class ProductContext : DbContext
     /// </summary>
     /// <param name="modelBuilder"> define entities</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder) => modelBuilder.ApplyConfiguration(new ProductsEntityTypeConfiguration());
-
-    /// <summary>
-    /// Enable Sensitive Data Logging
-    /// </summary>
-    /// <param name="optionsBuilder"></param>
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.EnableSensitiveDataLogging();
 }

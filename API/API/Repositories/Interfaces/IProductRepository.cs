@@ -10,21 +10,21 @@ namespace API.Repositories.Interfaces;
 public interface IProductRepository
 {
     /// <summary>
-    /// Get product
+    /// Get a product from their product Id
     /// </summary>
     /// <param name="product"> product id </param>
     /// <returns>Products</returns>
     Task<ProductModel> GetProduct(int product);
 
     /// <summary>
-    /// Create product
+    /// Create a new product
     /// </summary>
     /// <param name="product"> created product </param>
     /// <returns> created product </returns>
     Task<ProductModel> CreateProduct(ProductModel product);
 
     /// <summary>
-    /// Update product
+    /// Update an existing product
     /// </summary>
     /// <param name="product"> updated product </param>
     /// <returns> updated product </returns>

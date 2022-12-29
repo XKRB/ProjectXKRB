@@ -2,6 +2,8 @@
 using API.Models;
 using API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+using Microsoft.OpenApi.Writers;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -15,23 +17,29 @@ namespace API.Controllers;
 [ApiController]
 public class ProductController : ControllerBase
 {
+    /// <summary>
+    /// Manage product busines logic
+    /// </summary>
+    private readonly IProductService _productService;
 
-    private readonly IProductService? _productService;
-
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="productService"></param>
     public ProductController(IProductService productService) => _productService = productService;
 
     /// <summary>
     /// Get product data
     /// </summary>
-    /// <param name="GetProduct"> product Id </param>
-    /// <returns> product Id  </returns>
-    [HttpGet("{GetProduct}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<ProductModel>> GetProduct(int GetProduct)
+    /// <param name="idProduct"> product Id </param>
+    /// <returns> product Id, product name and product price </returns>
+    [HttpGet("{idProduct}")]
+    //[ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<ProductModel>> GetProduct(int idProduct)
     {
         try
         {
-            ProductModel product = await _productService.GetProduct(GetProduct);
+            ProductModel product = await _productService.GetProduct(idProduct);
             return Ok(product);
         }
         catch (ExceptionClass ex)
@@ -43,13 +51,14 @@ public class ProductController : ControllerBase
     /// <summary>
     /// Post product data
     /// </summary>
+    /// <param name="CreateProduct"> product Id, product name and product price</param>
+    /// <returns> product Id, product name and product price </returns>
     [HttpPost]
-    public async Task<ActionResult<ProductModel>> PostProduct(ProductModel PostProduct)
+    public async Task<ActionResult<ProductModel>> PostProduct(ProductModel CreateProduct)
     {
         try
         {
-            await _productService.CreateProduct(PostProduct);
-            return Ok(PostProduct);
+            return Ok(await _productService.CreateProduct(CreateProduct));
         }
         catch (ExceptionClass ex)
         {
@@ -60,18 +69,18 @@ public class ProductController : ControllerBase
     /// <summary>
     /// Put product data
     /// </summary>
+    /// <param name="UpdateProduct"> product Id, product name and product price</param>
+    /// <returns> product Id, product name and product price </returns>
     [HttpPut]
-    public async Task<ActionResult<ProductModel>> PutProduct(ProductModel PutProduct)
+    public async Task<ActionResult<ProductModel>> PutProduct(ProductModel UpdateProduct)
     {
         try
         {
-
-            return Ok(await _productService.UpdateProduct(PutProduct));
+            return Ok(await _productService.UpdateProduct(UpdateProduct));
         }
         catch (ExceptionClass ex)
         {
-            //return BadRequest(ex.Message);
-            return BadRequest("Product does not exist, you can´t modify");
+            return BadRequest(ex.Message);
         }
     }
 
@@ -79,14 +88,15 @@ public class ProductController : ControllerBase
     /// <summary>
     /// Delete product data
     /// </summary>
-    [HttpDelete("{DeleteProduct}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult> DeleteProduct(int DeleteProduct)
+    /// <param name="idProduct"> product Id</param>
+    [HttpDelete("{idProduct}")]
+    //[ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult> DeleteProduct(int idProduct)
     {
         try
         {
-            await _productService.DeleteProduct(DeleteProduct);
-            return Ok("The product was deleted");
+            await _productService.DeleteProduct(idProduct);
+            return Ok();
         }
         catch (ExceptionClass ex)
         {

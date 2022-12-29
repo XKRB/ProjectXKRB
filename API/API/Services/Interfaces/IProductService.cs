@@ -8,20 +8,20 @@ namespace API.Services.Interfaces;
 public interface IProductService
 {
     /// <summary>
-    /// Get Product Data
+    /// Get a product from their product Id
     /// </summary>
     /// <param name="product"> product id </param>
     /// <returns> Product ID, Product Name and Product Price </returns>
     Task<ProductModel> GetProduct(int product);
 
     /// <summary>
-    /// Create Product
+    /// Create a new Product
     /// </summary>
     /// <param name="product"> createProduct object </param>
     Task<ProductModel> CreateProduct(ProductModel product);
 
     /// <summary>
-    /// Update Product
+    /// Update an existing Product
     /// </summary>
     /// <param name="product"> update product </param>
     Task<ProductModel> UpdateProduct(ProductModel product);

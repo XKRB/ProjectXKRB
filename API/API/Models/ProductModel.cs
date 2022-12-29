@@ -38,6 +38,9 @@ public class ProductModel
     /// </summary>
     public double ProductPrice { get => _productPrice; set => _productPrice = value; }
 
+    /// <summary>
+    /// Constructor 
+    /// </summary>
     public ProductModel() { }
 
     /// <summary>
@@ -51,5 +54,14 @@ public class ProductModel
         _idProduct = idProduct;
         _productName = productName;
         _productPrice = productPrice;
+    }
+
+    /// <summary>
+    /// Constructor 
+    /// </summary>
+    /// <param name="idProduct">Product´s ID</param>
+    public ProductModel(int idProduct)
+    {
+        _idProduct = idProduct;
     }
 }

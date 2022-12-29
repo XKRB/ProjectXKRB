@@ -3,7 +3,11 @@ using API.Context.Context;
 using API.General.Classes.Configure;
 using API.Models;
 using API.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -26,14 +30,14 @@ public class ProductRepository : IProductRepository
     public ProductRepository(ProductContext productContext) => _productContext = productContext;
 
     /// <summary>
-    /// Get product
+    /// Get a product from their product Id
     /// </summary>
     /// <param name="product">get product</param>¿
     /// <returns> Product </returns>
     public async Task<ProductModel> GetProduct(int product) => await _productContext.Products.FindAsync(product);
 
     /// <summary>
-    /// Create product
+    /// Create a new product
     /// </summary>
     /// <param name="product">create product</param>
     /// <returns>create product</returns>
@@ -45,7 +49,7 @@ public class ProductRepository : IProductRepository
     }
 
     /// <summary>
-    /// Update product
+    /// Update an existing product
     /// </summary>
     /// <param name="product">product updated</param>
     /// <returns>product updated</returns>
@@ -78,6 +82,8 @@ public class ProductRepository : IProductRepository
         {
             _productContext.Products.Remove(product);
             await _productContext.SaveChangesAsync();
+            //message = "The product was deleted";
+            //return
         }
     }
 }

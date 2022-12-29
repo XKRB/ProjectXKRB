@@ -27,7 +27,7 @@ public class ProductService : IProductService
     public ProductService(IProductRepository productRepository) => _productRepository = productRepository;
 
     /// <summary>
-    /// Get product
+    /// Get a product from their product Id
     /// </summary>
     /// <param name="product"> product id </param>
     /// <returns> product id, product name and product price </returns>
@@ -42,11 +42,10 @@ public class ProductService : IProductService
         {
             return productModel;
         }
-
     }
 
     /// <summary>
-    /// Create product
+    /// Create a new product
     /// </summary>
     /// <param name="product"> Create product </param>
     public async Task<ProductModel> CreateProduct(ProductModel product)
@@ -56,6 +55,10 @@ public class ProductService : IProductService
         {
             throw new ExceptionClass("Product already exist");
         }
+        else if (product.IdProduct == 0)
+        {
+            throw new ExceptionClass("Bad product Id");
+        }
         else
         {
             await _productRepository.CreateProduct(product);
@@ -64,7 +67,7 @@ public class ProductService : IProductService
     }
 
     /// <summary>
-    /// Update product
+    /// Update an existing product
     /// </summary>
     /// <param name="product"> Update product </param>
     public async Task<ProductModel> UpdateProduct(ProductModel product)
@@ -76,5 +79,12 @@ public class ProductService : IProductService
     /// Delete product permanently
     /// </summary>
     /// <param name="product"> Delete product</param>
-    public async Task DeleteProduct(int product)=> await _productRepository.DeleteProduct(new ProductModel { IdProduct = product });
+    //public async Task DeleteProduct(int product)
+    //{
+    //    ProductModel productModel(int idProduct) = await _productRepository.DeleteProduct(product);
+    //    //if(await _productRepository.DeleteProduct(product =)
+        
+    //        //! await _productContext.Products.AnyAsync(x => x.IdProduct == product.IdProduct
+    //}
+    public async Task DeleteProduct(int product) => await _productRepository.DeleteProduct(new ProductModel { IdProduct = product });
 }

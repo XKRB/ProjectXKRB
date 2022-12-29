@@ -17,12 +17,9 @@ public class DependencyInjectionConfigure
     /// Dependency injection configure service
     /// </summary>
     /// <param name="services">Service collection</param>
-
     public static void ConfigureService(IServiceCollection services)
     {
         _ = services.AddScoped<IProductService, ProductService>();
         _ = services.AddScoped<IProductRepository, ProductRepository>();
     }
-
-    internal static void ConfigureService(object services) => throw new NotImplementedException();
 }

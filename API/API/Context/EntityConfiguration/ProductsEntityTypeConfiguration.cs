@@ -2,8 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+// <summary>
+// Developer....: Karla Ramos Benitez       USER ID: XKRB
+// </summary>
 namespace API.Context.EntityConfiguration;
 
+/// <summary>
+/// Products Entity type Configuration
+/// </summary>
 public class ProductsEntityTypeConfiguration : IEntityTypeConfiguration<ProductModel>
 {
     /// <summary>
