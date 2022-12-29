@@ -61,4 +61,15 @@ public class ProductModel
     /// </summary>
     /// <param name="idProduct">Product´s ID</param>
     public ProductModel(int idProduct) => _idProduct = idProduct;
+
+    /// <summary>
+    /// Constructor 
+    /// </summary>
+    /// /// <param name="productName">Product's name</param>
+    /// /// <param name="productPrice">Product´s price</param>
+    public ProductModel(string productName, double productPrice)
+    {
+        _productName = productName;
+        _productPrice = productPrice;
+    }
 }

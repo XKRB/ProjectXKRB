@@ -25,31 +25,24 @@ public class ProductRepository : IProductRepository
     public ProductRepository(ProductContext productContext) => _productContext = productContext;
 
     /// <summary>
+    /// Validate if the product exist
+    /// </summary>
+    /// <param name="idProduct"></param>
+    /// <returns></returns>
+    public async Task ProductExist(int idProduct)
+    {
+        if (! await _productContext.Products.AnyAsync(x => x.IdProduct == idProduct))
+        {
+            throw new ExceptionClass(ConstantsClass.ProductDoesNotExist);
+        }
+    }
+
+    /// <summary>
     /// Get a product from their product Id
     /// </summary>
     /// <param name="idProduct">get product</param>¿
     /// <returns> Product </returns>
-    
-    public async Task ProductExist(int idProduct)
-    {
-       if(await _productContext.Products.AnyAsync(x => x.IdProduct == idProduct))
-        {
-
-        }
-    }
     public async Task<ProductModel> GetProduct(int idProduct) => await _productContext.Products.FindAsync(idProduct);
-
-    //{
-    //    if(!await _productContext.Products.AnyAsync(x => x.IdProduct == idProduct))
-    //    {
-    //        throw new ExceptionClass("Product was not found");
-    //    }
-    //    else
-    //    {
-    //        ProductModel productModel = await _productContext.Products.Find(idProduct);
-    //        return idProduct;
-    //    }
-    //}
 
     /// <summary>
     /// Create a new product
@@ -60,10 +53,10 @@ public class ProductRepository : IProductRepository
     {
         if (await _productContext.Products.AnyAsync(x => x.IdProduct == product.IdProduct))
         {
-            throw new ExceptionClass("Product already exist");
+            throw new ExceptionClass(ConstantsClass.ProductAlreadyExist);
         }
         else
-        { 
+        {
             _ = _productContext.Products.Update(product);
             _ = await _productContext.SaveChangesAsync();
             return product;
@@ -79,7 +72,7 @@ public class ProductRepository : IProductRepository
     {
         if (!await _productContext.Products.AnyAsync(x => x.IdProduct == product.IdProduct))
         {
-            throw new ExceptionClass("Product does not exist, you can´t modify");
+            throw new ExceptionClass(ConstantsClass.ProductCanNotModify);
         }
         else
         {
@@ -98,7 +91,7 @@ public class ProductRepository : IProductRepository
     {
         if (!await _productContext.Products.AnyAsync(x => x.IdProduct == idProduct.IdProduct))
         {
-            throw new ExceptionClass("Product does not exist, you can´t eliminate");
+            throw new ExceptionClass(ConstantsClass.ProductCanNotDelete);
         }
         else
         {

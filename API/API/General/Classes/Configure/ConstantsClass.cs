@@ -5,6 +5,8 @@
 /// </summary>
 public class ConstantsClass
 {
+    public const string ProductDoesNotExist = "Product does not exist";
+
     /// <summary>
     /// Product not found
     /// </summary>

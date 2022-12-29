@@ -10,6 +10,13 @@ namespace API.Repositories.Interfaces;
 public interface IProductRepository
 {
     /// <summary>
+    /// Validate if the product exist
+    /// </summary>
+    /// <param name="idProduct"></param>
+    /// <returns></returns>
+    Task ProductExist(int idProduct);
+
+    /// <summary>
     /// Get a product from their product Id
     /// </summary>
     /// <param name="product"> product id </param>

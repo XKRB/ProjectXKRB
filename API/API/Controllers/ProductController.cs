@@ -55,11 +55,11 @@ public class ProductController : ControllerBase
     [HttpPost("{idProduct}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductModel))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<ProductModel>> PostProduct(ProductModel Product)
+    public async Task<ActionResult<ProductModel>> PostProduct(ProductModel product)
     {
         try
         {
-            return Ok(await _productService.CreateProduct(Product));
+            return Ok(await _productService.CreateProduct(product));
         }
         catch (ExceptionClass ex)
         {
