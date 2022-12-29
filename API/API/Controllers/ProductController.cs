@@ -2,8 +2,6 @@
 using API.Models;
 using API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
-using Microsoft.OpenApi.Writers;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -32,9 +30,10 @@ public class ProductController : ControllerBase
     /// Get product data
     /// </summary>
     /// <param name="idProduct"> product Id </param>
-    /// <returns> product Id, product name and product price </returns>
+    /// <returns> product </returns>
     [HttpGet("{idProduct}")]
-    //[ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductModel))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<ProductModel>> GetProduct(int idProduct)
     {
         try
@@ -51,14 +50,16 @@ public class ProductController : ControllerBase
     /// <summary>
     /// Post product data
     /// </summary>
-    /// <param name="CreateProduct"> product Id, product name and product price</param>
-    /// <returns> product Id, product name and product price </returns>
-    [HttpPost]
-    public async Task<ActionResult<ProductModel>> PostProduct(ProductModel CreateProduct)
+    /// <param name="Product"> product Id, product name and product price</param>
+    /// <returns> product </returns>
+    [HttpPost("{idProduct}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductModel))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<ProductModel>> PostProduct(ProductModel Product)
     {
         try
         {
-            return Ok(await _productService.CreateProduct(CreateProduct));
+            return Ok(await _productService.CreateProduct(Product));
         }
         catch (ExceptionClass ex)
         {
@@ -69,14 +70,16 @@ public class ProductController : ControllerBase
     /// <summary>
     /// Put product data
     /// </summary>
-    /// <param name="UpdateProduct"> product Id, product name and product price</param>
-    /// <returns> product Id, product name and product price </returns>
-    [HttpPut]
-    public async Task<ActionResult<ProductModel>> PutProduct(ProductModel UpdateProduct)
+    /// <param name="Product"> product Id, product name and product price</param>
+    /// <returns> product </returns>
+    [HttpPut("{idProduct}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductModel))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<ProductModel>> PutProduct(ProductModel Product)
     {
         try
         {
-            return Ok(await _productService.UpdateProduct(UpdateProduct));
+            return Ok(await _productService.UpdateProduct(Product));
         }
         catch (ExceptionClass ex)
         {
@@ -84,13 +87,14 @@ public class ProductController : ControllerBase
         }
     }
 
-
     /// <summary>
     /// Delete product data
     /// </summary>
     /// <param name="idProduct"> product Id</param>
+    /// <returns> task </returns>
     [HttpDelete("{idProduct}")]
-    //[ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> DeleteProduct(int idProduct)
     {
         try

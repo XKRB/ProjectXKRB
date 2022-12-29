@@ -14,7 +14,7 @@ public interface IProductRepository
     /// </summary>
     /// <param name="product"> product id </param>
     /// <returns>Products</returns>
-    Task<ProductModel> GetProduct(int product);
+    Task<ProductModel> GetProduct(int idProduct);
 
     /// <summary>
     /// Create a new product
@@ -35,5 +35,5 @@ public interface IProductRepository
     /// </summary>
     /// <param name="product"> deleted product </param>
     /// <returns>deleted product</returns>
-    Task DeleteProduct(ProductModel product);
+    Task DeleteProduct(ProductModel idProduct);
 }

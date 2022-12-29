@@ -5,6 +5,9 @@
 // </summary>
 namespace API.Services.Interfaces;
 
+/// <summary>
+/// To manage product service
+/// </summary>
 public interface IProductService
 {
     /// <summary>
@@ -12,7 +15,7 @@ public interface IProductService
     /// </summary>
     /// <param name="product"> product id </param>
     /// <returns> Product ID, Product Name and Product Price </returns>
-    Task<ProductModel> GetProduct(int product);
+    Task<ProductModel> GetProduct(int idProduct);
 
     /// <summary>
     /// Create a new Product

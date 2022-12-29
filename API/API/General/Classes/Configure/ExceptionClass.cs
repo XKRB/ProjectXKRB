@@ -8,12 +8,12 @@ public class ExceptionClass : Exception
     /// <summary>
     /// Message Id
     /// </summary>
-    private string _message;
+    private readonly string _message;
 
     /// <summary>
     /// Message Id
     /// </summary>
-    public String Message { get { return _message; } }
+    public string Message => _message;
 
     /// <summary>
     /// Constructor
@@ -25,8 +25,5 @@ public class ExceptionClass : Exception
     /// </summary>
     /// <param name="message"></param>
     public ExceptionClass(string message)
-        : base(message)
-    {
-        _message = message;
-    }
+        : base(message) => _message = message;
 }

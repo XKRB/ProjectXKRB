@@ -8,14 +8,11 @@ using API.Services.Interfaces;
 // </summary>
 namespace API.Services.Classes;
 
+/// <summary>
+/// To manage product service
+/// </summary>
 public class ProductService : IProductService
 {
-    /// <summary>
-    /// User Model
-    /// </summary>
-
-    //private readonly ProductModel? _product = null;
-
     /// <summary>
     /// To manage products's table data
     /// </summary>
@@ -29,62 +26,29 @@ public class ProductService : IProductService
     /// <summary>
     /// Get a product from their product Id
     /// </summary>
-    /// <param name="product"> product id </param>
+    /// <param name="idProduct"> product id </param>
     /// <returns> product id, product name and product price </returns>
-    public async Task<ProductModel> GetProduct(int product)
+    public async Task<ProductModel> GetProduct(int idProduct) //=> await _productRepository.GetProduct(idProduct);
     {
-        ProductModel productModel = await _productRepository.GetProduct(product);
-        if (productModel == null)
-        {
-            throw new ExceptionClass("Product was not found");
-        }
-        else
-        {
-            return productModel;
-        }
+        ProductModel productModel = await _productRepository.GetProduct(idProduct);
+        return productModel ?? throw new ExceptionClass("Product was not found");
     }
 
     /// <summary>
     /// Create a new product
     /// </summary>
     /// <param name="product"> Create product </param>
-    public async Task<ProductModel> CreateProduct(ProductModel product)
-    {
-        ProductModel productModel = await _productRepository.GetProduct(product.IdProduct);
-        if (productModel != null)
-        {
-            throw new ExceptionClass("Product already exist");
-        }
-        else if (product.IdProduct == 0)
-        {
-            throw new ExceptionClass("Bad product Id");
-        }
-        else
-        {
-            await _productRepository.CreateProduct(product);
-            return productModel;
-        }
-    }
+    public async Task<ProductModel> CreateProduct(ProductModel product) => await _productRepository.CreateProduct(product);
 
     /// <summary>
     /// Update an existing product
     /// </summary>
     /// <param name="product"> Update product </param>
-    public async Task<ProductModel> UpdateProduct(ProductModel product)
-    {
-        return await _productRepository.UpdateProduct(product);
-    }
+    public async Task<ProductModel> UpdateProduct(ProductModel product) => await _productRepository.UpdateProduct(product);
 
     /// <summary>
     /// Delete product permanently
     /// </summary>
-    /// <param name="product"> Delete product</param>
-    //public async Task DeleteProduct(int product)
-    //{
-    //    ProductModel productModel(int idProduct) = await _productRepository.DeleteProduct(product);
-    //    //if(await _productRepository.DeleteProduct(product =)
-        
-    //        //! await _productContext.Products.AnyAsync(x => x.IdProduct == product.IdProduct
-    //}
-    public async Task DeleteProduct(int product) => await _productRepository.DeleteProduct(new ProductModel { IdProduct = product });
+    /// <param name="idProduct"> Delete product</param>
+    public async Task DeleteProduct(int idProduct) => await _productRepository.DeleteProduct(new ProductModel(idProduct));
 }

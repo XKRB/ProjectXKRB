@@ -1,9 +1,5 @@
 using API.Context.Context;
 using API.General.Classes.Configure;
-using API.Repositories.Classes;
-using API.Repositories.Interfaces;
-using API.Services.Classes;
-using API.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -22,9 +18,7 @@ builder.Services.AddDbContext<ProductContext>(options => options.UseNpgsql(conne
 /// <summary>
 /// This method gets called by the runtime. Use this method to add services to the container.
 /// </summary>
-
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+DependencyInjectionConfigure.ConfigureService(builder.Services);
 
 WebApplication app = builder.Build();
 

@@ -1,13 +1,8 @@
-﻿
-using API.Context.Context;
+﻿using API.Context.Context;
 using API.General.Classes.Configure;
 using API.Models;
 using API.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -32,9 +27,29 @@ public class ProductRepository : IProductRepository
     /// <summary>
     /// Get a product from their product Id
     /// </summary>
-    /// <param name="product">get product</param>¿
+    /// <param name="idProduct">get product</param>¿
     /// <returns> Product </returns>
-    public async Task<ProductModel> GetProduct(int product) => await _productContext.Products.FindAsync(product);
+    
+    public async Task ProductExist(int idProduct)
+    {
+       if(await _productContext.Products.AnyAsync(x => x.IdProduct == idProduct))
+        {
+
+        }
+    }
+    public async Task<ProductModel> GetProduct(int idProduct) => await _productContext.Products.FindAsync(idProduct);
+
+    //{
+    //    if(!await _productContext.Products.AnyAsync(x => x.IdProduct == idProduct))
+    //    {
+    //        throw new ExceptionClass("Product was not found");
+    //    }
+    //    else
+    //    {
+    //        ProductModel productModel = await _productContext.Products.Find(idProduct);
+    //        return idProduct;
+    //    }
+    //}
 
     /// <summary>
     /// Create a new product
@@ -43,9 +58,16 @@ public class ProductRepository : IProductRepository
     /// <returns>create product</returns>
     public async Task<ProductModel> CreateProduct(ProductModel product)
     {
-        _ = _productContext.Products.Add(product);
-        _ = await _productContext.SaveChangesAsync();
-        return product;
+        if (await _productContext.Products.AnyAsync(x => x.IdProduct == product.IdProduct))
+        {
+            throw new ExceptionClass("Product already exist");
+        }
+        else
+        { 
+            _ = _productContext.Products.Update(product);
+            _ = await _productContext.SaveChangesAsync();
+            return product;
+        }
     }
 
     /// <summary>
@@ -61,8 +83,8 @@ public class ProductRepository : IProductRepository
         }
         else
         {
-            _productContext.Products.Update(product);
-            await _productContext.SaveChangesAsync();
+            _ = _productContext.Products.Update(product);
+            _ = await _productContext.SaveChangesAsync();
             return product;
         }
     }
@@ -70,20 +92,18 @@ public class ProductRepository : IProductRepository
     /// <summary>
     /// Delete product penanently
     /// </summary>
-    /// <param name="product">product deleted</param>
+    /// <param name="idProduct">product deleted</param>
     /// <returns>product deleted</returns>
-    public async Task DeleteProduct(ProductModel product)
+    public async Task DeleteProduct(ProductModel idProduct)
     {
-        if(! await _productContext.Products.AnyAsync(x => x.IdProduct == product.IdProduct))
+        if (!await _productContext.Products.AnyAsync(x => x.IdProduct == idProduct.IdProduct))
         {
             throw new ExceptionClass("Product does not exist, you can´t eliminate");
         }
         else
         {
-            _productContext.Products.Remove(product);
-            await _productContext.SaveChangesAsync();
-            //message = "The product was deleted";
-            //return
+            _ = _productContext.Products.Remove(idProduct);
+            _ = await _productContext.SaveChangesAsync();
         }
     }
 }

@@ -60,8 +60,5 @@ public class ProductModel
     /// Constructor 
     /// </summary>
     /// <param name="idProduct">Product´s ID</param>
-    public ProductModel(int idProduct)
-    {
-        _idProduct = idProduct;
-    }
+    public ProductModel(int idProduct) => _idProduct = idProduct;
 }
