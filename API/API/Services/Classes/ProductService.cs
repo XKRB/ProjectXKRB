@@ -2,7 +2,6 @@
 using API.Models;
 using API.Repositories.Interfaces;
 using API.Services.Interfaces;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -29,23 +28,20 @@ public class ProductService : IProductService
     /// </summary>
     /// <param name="idProduct"> product id </param>
     /// <returns> product id, product name and product price </returns>
-    //public async Task<ProductModel> GetProduct(int idProduct) //=> await _productRepository.GetProduct(idProduct);
-    public async Task<ProductModel> GetProduct(int idProduct) 
+    public async Task<ProductModel> GetProduct(int idProduct)
     {
         await _productRepository.ProductExist(idProduct);
-        return (await _productRepository.GetProduct(idProduct));
+        return await _productRepository.GetProduct(idProduct);
     }
 
     /// <summary>
     /// Create a new product
     /// </summary>
     /// <param name="product"> Create product </param>
-    //public async Task<ProductModel> CreateProduct(ProductModel product) => await _productRepository.CreateProduct(product);
     public async Task<ProductModel> CreateProduct(ProductModel product)
     {
-        await _productRepository.ProductExist(product.IdProduct);
-        return (await _productRepository.CreateProduct(product));
- 
+        //await _productRepository.ProductExist(product.IdProduct);
+        return await _productRepository.CreateProduct(product);
     }
 
     /// <summary>
