@@ -12,35 +12,35 @@ public interface IProductRepository
     /// <summary>
     /// Validate if the product exist
     /// </summary>
-    /// <param name="idProduct"></param>
-    /// <returns></returns>
-    Task ProductExist(int idProduct);
+    /// <param name="idProduct">product id</param>
+    /// <returns>bool</returns>
+    Task<bool> ProductExist(int idProduct);
 
     /// <summary>
     /// Get a product from their product Id
     /// </summary>
     /// <param name="product"> product id </param>
-    /// <returns>Products</returns>
+    /// <returns> product </returns>
     Task<ProductModel> GetProduct(int idProduct);
 
     /// <summary>
     /// Create a new product
     /// </summary>
-    /// <param name="product"> created product </param>
-    /// <returns> created product </returns>
+    /// <param name="product"> product </param>
+    /// <returns> product </returns>
     Task<ProductModel> CreateProduct(ProductModel product);
 
     /// <summary>
     /// Update an existing product
     /// </summary>
-    /// <param name="product"> updated product </param>
-    /// <returns> updated product </returns>
+    /// <param name="product"> product </param>
+    /// <returns> product </returns>
     Task<ProductModel> UpdateProduct(ProductModel product);
 
     /// <summary>
     /// Delete product penanently
     /// </summary>
-    /// <param name="product"> deleted product </param>
-    /// <returns>deleted product</returns>
+    /// <param name="product"> product </param>
+    /// <returns>task</returns>
     Task DeleteProduct(ProductModel idProduct);
 }

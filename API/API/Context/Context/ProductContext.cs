@@ -30,5 +30,9 @@ public class ProductContext : DbContext
     /// <param name="modelBuilder"> define entities</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder) => modelBuilder.ApplyConfiguration(new ProductsEntityTypeConfiguration());
 
+    /// <summary>
+    /// Enable sensitive data logging
+    /// </summary>
+    /// <param name="optionsBuilder"></param>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.EnableSensitiveDataLogging();
 }

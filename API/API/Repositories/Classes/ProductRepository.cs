@@ -1,5 +1,4 @@
 ﻿using API.Context.Context;
-using API.General.Classes.Configure;
 using API.Models;
 using API.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -27,76 +26,49 @@ public class ProductRepository : IProductRepository
     /// <summary>
     /// Validate if the product exist
     /// </summary>
-    /// <param name="idProduct"></param>
-    /// <returns></returns>
-    public async Task ProductExist(int idProduct)
-    {
-        if (! await _productContext.Products.AnyAsync(x => x.IdProduct == idProduct))
-        {
-            throw new ExceptionClass(ConstantsClass.ProductDoesNotExist);
-        }
-    }
+    /// <param name="idProduct"> product id </param>
+    /// <returns> bool </returns>
+    public async Task<bool> ProductExist(int idProduct) => await _productContext.Products.AnyAsync(x => x.IdProduct == idProduct);
 
     /// <summary>
     /// Get a product from their product Id
     /// </summary>
-    /// <param name="idProduct">get product</param>¿
+    /// <param name="idProduct"> product id </param>¿
     /// <returns> Product </returns>
     public async Task<ProductModel> GetProduct(int idProduct) => await _productContext.Products.FindAsync(idProduct);
 
     /// <summary>
     /// Create a new product
     /// </summary>
-    /// <param name="product">create product</param>
-    /// <returns>create product</returns>
+    /// <param name="product"> product </param>
+    /// <returns> product </returns>
     public async Task<ProductModel> CreateProduct(ProductModel product)
     {
-        if (await _productContext.Products.AnyAsync(x => x.IdProduct == product.IdProduct))
-        {
-            throw new ExceptionClass(ConstantsClass.ProductAlreadyExist);
-        }
-        else
-        {
-            _ = _productContext.Products.Update(product);
-            _ = await _productContext.SaveChangesAsync();
-            return product;
-        }
+        _ = _productContext.Products.Add(product);
+        _ = await _productContext.SaveChangesAsync();
+        return product;
     }
 
     /// <summary>
     /// Update an existing product
     /// </summary>
-    /// <param name="product">product updated</param>
-    /// <returns>product updated</returns>
+    /// <param name="product"> product </param>
+    /// <returns> product </returns>
     public async Task<ProductModel> UpdateProduct(ProductModel product)
     {
-        if (!await _productContext.Products.AnyAsync(x => x.IdProduct == product.IdProduct))
-        {
-            throw new ExceptionClass(ConstantsClass.ProductCanNotModify);
-        }
-        else
-        {
-            _ = _productContext.Products.Update(product);
-            _ = await _productContext.SaveChangesAsync();
-            return product;
-        }
+        _ = _productContext.Products.Update(product);
+        _ = await _productContext.SaveChangesAsync();
+        return product;
     }
 
     /// <summary>
     /// Delete product penanently
     /// </summary>
-    /// <param name="idProduct">product deleted</param>
-    /// <returns>product deleted</returns>
+    /// <param name="idProduct"> product id </param>
+    /// <returns>task</returns>
     public async Task DeleteProduct(ProductModel idProduct)
     {
-        if (!await _productContext.Products.AnyAsync(x => x.IdProduct == idProduct.IdProduct))
-        {
-            throw new ExceptionClass(ConstantsClass.ProductCanNotDelete);
-        }
-        else
-        {
-            _ = _productContext.Products.Remove(idProduct);
-            _ = await _productContext.SaveChangesAsync();
-        }
+        _ = _productContext.Products.Remove(idProduct);
+        _ = await _productContext.SaveChangesAsync();
     }
 }

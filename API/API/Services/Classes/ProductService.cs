@@ -27,32 +27,43 @@ public class ProductService : IProductService
     /// Get a product from their product Id
     /// </summary>
     /// <param name="idProduct"> product id </param>
-    /// <returns> product id, product name and product price </returns>
-    public async Task<ProductModel> GetProduct(int idProduct)
-    {
-        await _productRepository.ProductExist(idProduct);
-        return await _productRepository.GetProduct(idProduct);
-    }
+    /// <returns> product </returns>
+    public async Task<ProductModel> GetProduct(int idProduct) => await _productRepository.ProductExist(idProduct)
+            ? await _productRepository.GetProduct(idProduct)
+            : throw new ExceptionClass(ConstantsClass.ProductNotFound);
 
     /// <summary>
     /// Create a new product
     /// </summary>
-    /// <param name="product"> Create product </param>
-    public async Task<ProductModel> CreateProduct(ProductModel product)
-    {
-        //await _productRepository.ProductExist(product.IdProduct);
-        return await _productRepository.CreateProduct(product);
-    }
+    /// <param name="product"> product </param>
+    /// <returns> product </returns>
+    public async Task<ProductModel> CreateProduct(ProductModel product) => await _productRepository.ProductExist(product.IdProduct)
+            ? throw new ExceptionClass(ConstantsClass.ProductAlreadyExist)
+            : await _productRepository.CreateProduct(product);
 
     /// <summary>
     /// Update an existing product
     /// </summary>
-    /// <param name="product"> Update product </param>
-    public async Task<ProductModel> UpdateProduct(ProductModel product) => await _productRepository.UpdateProduct(product);
+    /// <param name="product"> product </param>
+    /// <returns> product </returns>
+    public async Task<ProductModel> UpdateProduct(ProductModel product) => await _productRepository.ProductExist(product.IdProduct)
+            ? await _productRepository.UpdateProduct(product)
+            : throw new ExceptionClass(ConstantsClass.ProductCanNotModify);
 
     /// <summary>
     /// Delete product permanently
     /// </summary>
-    /// <param name="idProduct"> Delete product</param>
-    public async Task DeleteProduct(int idProduct) => await _productRepository.DeleteProduct(new ProductModel(idProduct));
+    /// <param name="idProduct"> product id </param>
+    /// <returns> task </returns>
+    public async Task DeleteProduct(int idProduct)
+    {
+        if (!await _productRepository.ProductExist(idProduct))
+        {
+            throw new ExceptionClass(ConstantsClass.ProductCanNotDelete);
+        }
+        else
+        {
+            await _productRepository.DeleteProduct(new ProductModel(idProduct));
+        }
+    }
 }

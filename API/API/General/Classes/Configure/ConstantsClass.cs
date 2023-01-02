@@ -5,8 +5,6 @@
 /// </summary>
 public class ConstantsClass
 {
-    public const string ProductDoesNotExist = "Product does not exist";
-
     /// <summary>
     /// Product not found
     /// </summary>
@@ -18,11 +16,6 @@ public class ConstantsClass
     public const string ProductAlreadyExist = "Product already exist";
 
     /// <summary>
-    /// Bad product request Id
-    /// </summary>
-    public const string BadProductId = "Bad product Id";
-
-    /// <summary>
     /// Product can not modify
     /// </summary>
     public const string ProductCanNotModify = "Product does not exist, you can´t modify";
@@ -31,4 +24,9 @@ public class ConstantsClass
     /// Product can not delete
     /// </summary>
     public const string ProductCanNotDelete = "Product does not exist, you can´t eliminate";
+
+    /// <summary>
+    /// Product deleted
+    /// </summary>
+    public const string ProductDeleted = "Product deleted";
 }

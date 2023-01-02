@@ -6,7 +6,7 @@ namespace API.Models;
 /// <summary>
 /// Products Model
 /// </summary>
-public class ProductModelx
+public class ProductModelInput
 {
     /// <summary>
     /// Product Name
@@ -31,14 +31,14 @@ public class ProductModelx
     /// <summary>
     /// Constructor 
     /// </summary>
-    public ProductModelx() { }
+    public ProductModelInput() { }
 
     /// <summary>
     /// Constructor 
     /// </summary>
     /// /// <param name="productName">Product's name</param>
     /// /// <param name="productPrice">Product´s price</param>
-    public ProductModelx(string productName, double productPrice)
+    public ProductModelInput(string productName, double productPrice)
     {
         _productName = productName;
         _productPrice = productPrice;

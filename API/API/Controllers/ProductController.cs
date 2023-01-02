@@ -50,16 +50,16 @@ public class ProductController : ControllerBase
     /// <summary>
     /// Post product data
     /// </summary>
-    /// <param name="Product"> product Id, product name and product price</param>
+    /// <param name="Product"> product </param>
     /// <returns> product </returns>
     [HttpPost("{idProduct}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductModel))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<ProductModel>> PostProduct(ProductModel product)
+    public async Task<ActionResult<ProductModel>> PostProduct(int idProduct, [FromBody] ProductModelInput product)
     {
         try
         {
-            return Ok(await _productService.CreateProduct(product));
+            return Ok(await _productService.CreateProduct(new ProductModel(idProduct, product.ProductName, product.ProductPrice)));
         }
         catch (ExceptionClass ex)
         {
@@ -70,16 +70,16 @@ public class ProductController : ControllerBase
     /// <summary>
     /// Put product data
     /// </summary>
-    /// <param name="Product"> product Id, product name and product price</param>
+    /// <param name="product"> product </param>
     /// <returns> product </returns>
     [HttpPut("{idProduct}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductModel))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<ProductModel>> PutProduct(ProductModel Product)
+    public async Task<ActionResult<ProductModel>> PutProduct(int idProduct, [FromBody] ProductModelInput product)
     {
         try
         {
-            return Ok(await _productService.UpdateProduct(Product));
+            return Ok(await _productService.UpdateProduct(new ProductModel(idProduct, product.ProductName, product.ProductPrice)));
         }
         catch (ExceptionClass ex)
         {
@@ -100,7 +100,7 @@ public class ProductController : ControllerBase
         try
         {
             await _productService.DeleteProduct(idProduct);
-            return Ok();
+            return Ok(ConstantsClass.ProductDeleted);
         }
         catch (ExceptionClass ex)
         {
