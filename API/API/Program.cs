@@ -11,21 +11,23 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Conection to data base
-string? connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnection");
-builder.Services.AddDbContext<ProductContext>(options => options.UseNpgsql(connectionString));
-
 
 
 /// <summary>
 /// This method gets called by the runtime. Use this method to add services to the container.
 /// </summary>
+
+//Conection to data base
+DatabaseConfigure.ConfigureService(builder.Services, builder);
+//Dependency Injection
 DependencyInjectionConfigure.ConfigureService(builder.Services);
+//Globalization Configure service
 GlobalizationConfigure.ConfigureService(builder.Services);
 
 
  WebApplication app = builder.Build();
 
+//Globalization Configure
 GlobalizationConfigure.Configure(app);
 
 // Configure the HTTP request pipeline.

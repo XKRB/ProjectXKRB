@@ -1,7 +1,12 @@
 ﻿using API.Repositories.Interfaces;
-
 namespace API.Repositories.Classes;
+// <summary>
+// Developer....: Karla Ramos Benitez       USER ID: XKRB
+// </summary>
 
+/// <summary>
+/// Interface LogIn Repository
+/// </summary>
 public class LogInRepository : ILogInRepository
 {
     ///// <summary>

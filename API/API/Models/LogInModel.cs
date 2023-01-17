@@ -1,5 +1,11 @@
-﻿namespace API.Models;
+﻿// <summary>
+// Developer....: Karla Ramos Benitez       USER ID: XKRB
+// </summary>
+namespace API.Models;
 
+/// <summary>
+/// LogIn Model
+/// </summary>
 public class LogInModel
 {
     /// <summary>

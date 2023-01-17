@@ -1,11 +1,14 @@
 ﻿using API.Controllers;
 using System.Net;
 
-namespace API.General.Classes;
-
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
 // </summary>
+namespace API.General.Classes;
+
+/// <summary>
+/// Product exception 
+/// </summary>
 public class ProductException : Exception
 {
     /// <summary>

@@ -1,7 +1,13 @@
 ﻿using API.Services.Interfaces;
 
+// <summary>
+// Developer....: Karla Ramos Benitez       USER ID: XKRB
+// </summary>
 namespace API.Services.Classes;
 
+/// <summary>
+/// LogIn Service
+/// </summary>
 public class LogInService : ILogInService
 {
     ///// <summary>

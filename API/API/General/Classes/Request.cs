@@ -1,7 +1,13 @@
 ﻿using API.Controllers;
 
+// <summary>
+// Developer....: Karla Ramos Benitez       USER ID: XKRB
+// </summary>
 namespace API.General.Classes;
 
+/// <summary>
+/// Request
+/// </summary>
 public class Request
 {
     /// <summary>

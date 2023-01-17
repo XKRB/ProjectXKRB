@@ -1,5 +1,11 @@
-﻿namespace API.Repositories.Interfaces;
+﻿// <summary>
+// Developer....: Karla Ramos Benitez       USER ID: XKRB
+// </summary>
+namespace API.Repositories.Interfaces;
 
+/// <summary>
+/// LogIn Repository
+/// </summary>
 public interface ILogInRepository
 {
     ///// <summary>

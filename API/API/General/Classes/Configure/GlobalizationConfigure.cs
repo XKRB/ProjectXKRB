@@ -3,10 +3,20 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.VisualBasic;
 using System.Globalization;
 
+// <summary>
+// Developer....: Karla Ramos Benitez       USER ID: XKRB
+// </summary>
 namespace API.General.Classes.Configure;
 
+/// <summary>
+/// Globalization configure
+/// </summary>
 public class GlobalizationConfigure
 {
+    /// <summary>
+    /// Globalization configure
+    /// </summary>
+    /// <param name="services"></param>
     public static void ConfigureService(IServiceCollection services)
     {
         services.AddLocalization(options => { options.ResourcesPath = ProductConstants.Resources; });
@@ -31,6 +41,10 @@ public class GlobalizationConfigure
            }); //Globalization
     }
 
+    /// <summary>
+    /// Configure
+    /// </summary>
+    /// <param name="app"></param>
     public static void Configure(IApplicationBuilder app)
     {
         //Globalization

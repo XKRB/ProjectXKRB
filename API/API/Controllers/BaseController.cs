@@ -2,8 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
+// <summary>
+// Developer....: Karla Ramos Benitez       USER ID: XKRB
+// </summary>
 namespace API.Controllers;
 
+/// <summary>
+/// Base Controller 
+/// </summary>
 public class BaseController : Controller
 {
 

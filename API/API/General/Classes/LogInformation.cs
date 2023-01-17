@@ -1,4 +1,7 @@
-﻿namespace API.General.Classes;
+﻿// <summary>
+// Developer....: Karla Ramos Benitez       USER ID: XKRB
+// </summary>
+namespace API.General.Classes;
 
 public class LogInformation
 {
