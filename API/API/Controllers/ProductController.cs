@@ -1,7 +1,8 @@
-﻿using API.General.Classes.Configure;
+﻿using API.General.Classes;
 using API.Models;
 using API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -13,7 +14,7 @@ namespace API.Controllers;
 /// </summary>
 [Route("/products")]
 [ApiController]
-public class ProductController : ControllerBase
+public class ProductController : BaseController
 {
     /// <summary>
     /// Manage product busines logic
@@ -24,7 +25,7 @@ public class ProductController : ControllerBase
     /// Constructor
     /// </summary>
     /// <param name="productService"></param>
-    public ProductController(IProductService productService) => _productService = productService;
+    public ProductController(IProductService productService, IStringLocalizer<BaseController> localizer) : base(localizer) => _productService = productService;
 
     /// <summary>
     /// Get product data
@@ -41,9 +42,13 @@ public class ProductController : ControllerBase
             ProductModel product = await _productService.GetProduct(idProduct);
             return Ok(product);
         }
-        catch (ExceptionClass ex)
+        catch (ProductException)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(new Request(1).GetActionResult());
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
         }
     }
 
@@ -61,9 +66,15 @@ public class ProductController : ControllerBase
         {
             return Ok(await _productService.CreateProduct(new ProductModel(idProduct, product.ProductName, product.ProductPrice)));
         }
-        catch (ExceptionClass ex)
+        catch (ProductException )
         {
-            return BadRequest(ex.Message);
+            //return BadRequest(ex.Message);
+            return BadRequest(new Request(2).GetActionResult());
+
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
         }
     }
 
@@ -81,9 +92,14 @@ public class ProductController : ControllerBase
         {
             return Ok(await _productService.UpdateProduct(new ProductModel(idProduct, product.ProductName, product.ProductPrice)));
         }
-        catch (ExceptionClass ex)
+        catch (ProductException)
         {
-            return BadRequest(ex.Message);
+            //return BadRequest(ex.Message);
+            return BadRequest(new Request(3).GetActionResult());
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
         }
     }
 
@@ -100,11 +116,16 @@ public class ProductController : ControllerBase
         try
         {
             await _productService.DeleteProduct(idProduct);
-            return Ok(ConstantsClass.ProductDeleted);
+            return Ok(ProductConstants.ProductDeleted);
         }
-        catch (ExceptionClass ex)
+        catch (ProductException )
         {
-            return BadRequest(ex.Message);
+            //return BadRequest(ex.Message);
+            return BadRequest(new Request(4).GetActionResult());
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
         }
     }
 }

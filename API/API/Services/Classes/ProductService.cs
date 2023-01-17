@@ -1,4 +1,4 @@
-﻿using API.General.Classes.Configure;
+﻿using API.General.Classes;
 using API.Models;
 using API.Repositories.Interfaces;
 using API.Services.Interfaces;
@@ -23,6 +23,8 @@ public class ProductService : IProductService
     /// </summary>
     public ProductService(IProductRepository productRepository) => _productRepository = productRepository;
 
+    //public var resourceManager = new ResourceManager("BaseController.en-US", Assembly.GetExecutingAssembly());
+
     /// <summary>
     /// Get a product from their product Id
     /// </summary>
@@ -30,7 +32,8 @@ public class ProductService : IProductService
     /// <returns> product </returns>
     public async Task<ProductModel> GetProduct(int idProduct) => await _productRepository.ProductExist(idProduct)
             ? await _productRepository.GetProduct(idProduct)
-            : throw new ExceptionClass(ConstantsClass.ProductNotFound);
+            : throw new ProductException(1);
+    //: throw new ProductException(1);
 
     /// <summary>
     /// Create a new product
@@ -38,7 +41,7 @@ public class ProductService : IProductService
     /// <param name="product"> product </param>
     /// <returns> product </returns>
     public async Task<ProductModel> CreateProduct(ProductModel product) => await _productRepository.ProductExist(product.IdProduct)
-            ? throw new ExceptionClass(ConstantsClass.ProductAlreadyExist)
+            ? throw new ProductException(2)
             : await _productRepository.CreateProduct(product);
 
     /// <summary>
@@ -48,7 +51,7 @@ public class ProductService : IProductService
     /// <returns> product </returns>
     public async Task<ProductModel> UpdateProduct(ProductModel product) => await _productRepository.ProductExist(product.IdProduct)
             ? await _productRepository.UpdateProduct(product)
-            : throw new ExceptionClass(ConstantsClass.ProductCanNotModify);
+            : throw new ProductException(3);
 
     /// <summary>
     /// Delete product permanently
@@ -59,7 +62,7 @@ public class ProductService : IProductService
     {
         if (!await _productRepository.ProductExist(idProduct))
         {
-            throw new ExceptionClass(ConstantsClass.ProductCanNotDelete);
+            throw new ProductException(4);
         }
         else
         {

@@ -1,9 +1,13 @@
-﻿namespace API.General.Classes.Configure;
+﻿// <summary>
+// Developer....: Karla Ramos Benitez       USER ID: XKRB
+// </summary>
+
+namespace API.General.Classes;
 
 /// <summary>
 /// Manage constants
 /// </summary>
-public class ConstantsClass
+public class ProductConstants
 {
     /// <summary>
     /// Product not found
@@ -29,4 +33,17 @@ public class ConstantsClass
     /// Product deleted
     /// </summary>
     public const string ProductDeleted = "Product deleted";
+
+    //public class TableNames
+    //{
+    //    public const string LogIns = "LogIns";
+
+    //    public const string Products = "Products";
+    //}
+
+    public const string Resources = "Resources";
+
+    public const string enUS = "en-US";
+
+    public const string esMX = "es-MX";
 }

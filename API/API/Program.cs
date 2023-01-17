@@ -15,12 +15,18 @@ builder.Services.AddSwaggerGen();
 string? connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnection");
 builder.Services.AddDbContext<ProductContext>(options => options.UseNpgsql(connectionString));
 
+
+
 /// <summary>
 /// This method gets called by the runtime. Use this method to add services to the container.
 /// </summary>
 DependencyInjectionConfigure.ConfigureService(builder.Services);
+GlobalizationConfigure.ConfigureService(builder.Services);
 
-WebApplication app = builder.Build();
+
+ WebApplication app = builder.Build();
+
+GlobalizationConfigure.Configure(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

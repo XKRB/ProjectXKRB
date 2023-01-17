@@ -4,7 +4,7 @@
 namespace API.Models;
 
 /// <summary>
-/// Products Model
+/// Products Model Input
 /// </summary>
 public class ProductModelInput
 {
