@@ -1,6 +1,4 @@
-using API.Context.Context;
 using API.General.Classes.Configure;
-using Microsoft.EntityFrameworkCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +8,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
 
 /// <summary>
 /// This method gets called by the runtime. Use this method to add services to the container.
@@ -24,8 +20,7 @@ DependencyInjectionConfigure.ConfigureService(builder.Services);
 //Globalization Configure service
 GlobalizationConfigure.ConfigureService(builder.Services);
 
-
- WebApplication app = builder.Build();
+WebApplication app = builder.Build();
 
 //Globalization Configure
 GlobalizationConfigure.Configure(app);

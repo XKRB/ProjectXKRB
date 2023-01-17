@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.VisualBasic;
 using System.Globalization;
 
 // <summary>
@@ -19,9 +18,9 @@ public class GlobalizationConfigure
     /// <param name="services"></param>
     public static void ConfigureService(IServiceCollection services)
     {
-        services.AddLocalization(options => { options.ResourcesPath = ProductConstants.Resources; });
-        services.AddControllers();
-        services.AddMvc(a => a.EnableEndpointRouting = false)
+        _ = services.AddLocalization(options => { options.ResourcesPath = ProductConstants.Resources; });
+        _ = services.AddControllers();
+        _ = services.AddMvc(a => a.EnableEndpointRouting = false)
             .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
             .AddDataAnnotationsLocalization();
 

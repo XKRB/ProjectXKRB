@@ -66,7 +66,7 @@ public class ProductController : BaseController
         {
             return Ok(await _productService.CreateProduct(new ProductModel(idProduct, product.ProductName, product.ProductPrice)));
         }
-        catch (ProductException )
+        catch (ProductException)
         {
             //return BadRequest(ex.Message);
             return BadRequest(new Request(2).GetActionResult());
@@ -118,7 +118,7 @@ public class ProductController : BaseController
             await _productService.DeleteProduct(idProduct);
             return Ok(ProductConstants.ProductDeleted);
         }
-        catch (ProductException )
+        catch (ProductException)
         {
             //return BadRequest(ex.Message);
             return BadRequest(new Request(4).GetActionResult());
