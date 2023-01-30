@@ -19,8 +19,7 @@ public class DatabaseConfigure
         string? connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnection");
         //Configure our DBContext to our dependency injection system and configure to use postgres
         _ = services.AddDbContext<ProductContext>(options => options.UseNpgsql(connectionString));
+        _ = services.AddDbContext<LogInContext>(options => options.UseNpgsql(connectionString));
 
-        //string? connectionString = builder.Configuration.GetConnectionString("PostgreSQLConnection");
-        //builder.Services.AddDbContext<ProductContext>(options => options.UseNpgsql(connectionString));
     }
 }

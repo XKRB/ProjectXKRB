@@ -2,26 +2,19 @@
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 
-// <summary>
-// Developer....: Karla Ramos Benitez       USER ID: XKRB
-// </summary>
 namespace API.Context.Context;
 
-/// <summary>
-/// Product Context
-/// To connect to the database and query product's tables
-/// </summary>
-public class ProductContext : DbContext
+public class UserContext:DbContext
 {
     /// <summary>
     /// To query Products table
     /// </summary>
-    public DbSet<ProductModel> Products { get; set; }
+    public DbSet<LogInModel> Users { get; set; }
 
     /// <summary>
     /// Constructor
     /// </summary>
-    public ProductContext(DbContextOptions<ProductContext> options) : base(options)
+    public UserContext(DbContextOptions<UserContext> options) : base(options)
     {
     }
 
@@ -29,7 +22,11 @@ public class ProductContext : DbContext
     /// Apply entity type congigurations when the model is creating
     /// </summary>
     /// <param name="modelBuilder"> define entities</param>
-    protected override void OnModelCreating(ModelBuilder modelBuilder) => modelBuilder.ApplyConfiguration(new ProductsEntityTypeConfiguration());
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        _ = modelBuilder.ApplyConfiguration(new LogInEntityTypeConfiguration());
+        //_ = modelBuilder.ApplyConfiguration(new RefreshTokenTypeConfiguration());
+    }
 
     /// <summary>
     /// Enable sensitive data logging

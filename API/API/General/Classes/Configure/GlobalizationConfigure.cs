@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Localization;
+﻿using API.Controllers;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
+using System.Resources;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -55,7 +57,7 @@ public class GlobalizationConfigure
 
         _ = app.UseRequestLocalization(new RequestLocalizationOptions
         {
-            DefaultRequestCulture = new RequestCulture(ProductConstants.enUS),
+            DefaultRequestCulture = new RequestCulture(ProductConstants.esMX),
             // Formatting numbers, dates, etc.
             SupportedCultures = supportedCultures,
             // UI strings that we have localized.

@@ -1,4 +1,5 @@
-﻿using API.Models;
+﻿using API.General.Classes;
+using API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,11 +13,11 @@ public class LogInEntityTypeConfiguration : IEntityTypeConfiguration<LogInModel>
     /// <param name="builder"></param>
     public void Configure(EntityTypeBuilder<LogInModel> builder)
     {
-        _ = builder.HasKey(key => new { key.UserId, key.JwtId });
+        _ = builder.ToTable(ProductConstants.TableNames.LogIns);
+        _ = builder.HasKey(key => new { key.UserName});
 
         //Configure the properties
-        _ = builder.Property(property => property.LoggedIn);
-        _ = builder.Property(property => property.DateTime);
-        _ = builder.Property(property => property.Token);
+        _ = builder.Property(property => property.UserPassword);
+
     }
 }

@@ -1,4 +1,8 @@
-﻿using API.Services.Interfaces;
+﻿using API.General.Classes;
+using API.Models;
+using API.Repositories.Classes;
+using API.Repositories.Interfaces;
+using API.Services.Interfaces;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -10,54 +14,51 @@ namespace API.Services.Classes;
 /// </summary>
 public class LogInService : ILogInService
 {
-    ///// <summary>
-    ///// To manage data from the logIn table
-    ///// </summary>
-    //public ILogInRepository _logInRepository;
+    /// <summary>
+    /// To manage data from the logIn table
+    /// </summary>
+    private readonly ILogInRepository _logInRepository;
 
-    ///// <summary>
-    ///// Token manager
-    ///// </summary>
-    //private readonly ITokenManager _tokenGenerator;
+    /// <summary>
+    /// Parameters are passed via dependency injection to query tables
+    /// </summary>
+    public LogInService(ILogInRepository logInRepository) => _logInRepository = logInRepository;
 
-    ///// <summary>
-    ///// To manage data from User table
-    ///// </summary>
-    //private readonly IProductService _productService;
-
-    ///// <summary>
-    ///// Parameters are passed via dependency injection to manage tables data
-    ///// </summary>
-    //public LogInService(ILogInRepository logInRepository, ITokenManager tokenGenerator, IProductService productService)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="userLogin"></param>
+    /// <returns></returns>
+    /// 
+    //public async Task LoginUser(LogInModel userLogin)
     //{
-    //    _logInRepository = logInRepository;
-    //    _tokenGenerator = tokenGenerator;
-    //    _productService = productService;
-    //}
-
-    ///// <summary>
-    ///// To register new login
-    ///// </summary>
-    ///// <param name="userId">User´s Id</param>
-    ///// <param name="token">Token</param>
-    ///// <returns>Task</returns>
-    //public async Task RegisterLogIn(string userId, string token)
-    //{
-    //    ClaimsPrincipal claims = _tokenGenerator.ReadToken(token);
-
-    //    if (claims == null)
+    //    if ( await _logInRepository.AuthenticateUser(userLogin.UserName, userLogin.UserPassword) == false)
     //    {
-    //        throw new ExceptionClass(6);
+    //        throw new APIException(7);
     //    }
-
-    //    string jti = claims.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
-
-    //    await _logInRepository.RegisterLogIn(userId, jti, token);
+    //    else
+    //    {
+    //        await _logInRepository.LoginUser(userLogin);
+    //    }
     //}
+    public async Task LoginUser(LogInModel userLogin)
+    {
+        await _logInRepository.LoginUser(userLogin);
+    }
 
-    ///// <summary>
-    ///// Release database allocate resources
-    ///// </summary>
-    ///// <returns>Task</returns>
-    //public async Task Dispose() => await _logInRepository.Dispose();
+
+
+    //public async Task LogInUser(LogInModel userlogin) => await _logInRepository.AuthenticateUser(userName, userPassword)
+    //    ? throw new APIException(2)
+    //    : await _logInRepository.AuthenticateUser(product);
+
+
+    //if (!await _logInRepository.AuthenticateUser(userLogin))
+    //{
+    //    throw new APIException(8);
+    //}
+    //else
+    //{
+    //    throw new APIException(6);
+    //}
 }

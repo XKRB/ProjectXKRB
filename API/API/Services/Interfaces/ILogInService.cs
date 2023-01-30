@@ -1,4 +1,6 @@
-﻿// <summary>
+﻿using API.Models;
+
+// <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
 // </summary>
 namespace API.Services.Interfaces;
@@ -8,12 +10,11 @@ namespace API.Services.Interfaces;
 /// </summary>
 public interface ILogInService
 {
-    ///// <summary>
-    ///// To register new login
-    ///// </summary>
-    ///// <param name="userId">User´s Id</param>
-    ///// <param name="token">Token</param>
-    ///// <returns>Task</returns>
-    //public Task RegisterLogIn(string userId, string token);
+    /// <summary>
+    ///  User Login
+    /// </summary>
+    /// <param name="userLogin"> Username and password </param>
+    /// <returns> task </returns>
+    Task LoginUser(LogInModel userLogin);
 
 }

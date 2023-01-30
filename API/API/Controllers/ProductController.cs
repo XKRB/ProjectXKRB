@@ -42,7 +42,7 @@ public class ProductController : BaseController
             ProductModel product = await _productService.GetProduct(idProduct);
             return Ok(product);
         }
-        catch (ProductException)
+        catch (APIException)
         {
             return BadRequest(new Request(1).GetActionResult());
         }
@@ -66,11 +66,9 @@ public class ProductController : BaseController
         {
             return Ok(await _productService.CreateProduct(new ProductModel(idProduct, product.ProductName, product.ProductPrice)));
         }
-        catch (ProductException)
+        catch (APIException)
         {
-            //return BadRequest(ex.Message);
             return BadRequest(new Request(2).GetActionResult());
-
         }
         catch (Exception e)
         {
@@ -92,7 +90,7 @@ public class ProductController : BaseController
         {
             return Ok(await _productService.UpdateProduct(new ProductModel(idProduct, product.ProductName, product.ProductPrice)));
         }
-        catch (ProductException)
+        catch (APIException)
         {
             //return BadRequest(ex.Message);
             return BadRequest(new Request(3).GetActionResult());
@@ -116,11 +114,11 @@ public class ProductController : BaseController
         try
         {
             await _productService.DeleteProduct(idProduct);
-            return Ok(ProductConstants.ProductDeleted);
+            //return Ok(ProductConstants.ProductDeleted);
+            return Ok(new Request(5).GetActionResult());
         }
-        catch (ProductException)
+        catch (APIException)
         {
-            //return BadRequest(ex.Message);
             return BadRequest(new Request(4).GetActionResult());
         }
         catch (Exception e)

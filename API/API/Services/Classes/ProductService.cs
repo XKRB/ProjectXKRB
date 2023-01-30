@@ -32,7 +32,7 @@ public class ProductService : IProductService
     /// <returns> product </returns>
     public async Task<ProductModel> GetProduct(int idProduct) => await _productRepository.ProductExist(idProduct)
             ? await _productRepository.GetProduct(idProduct)
-            : throw new ProductException(1);
+            : throw new APIException(1);
     //: throw new ProductException(1);
 
     /// <summary>
@@ -41,7 +41,7 @@ public class ProductService : IProductService
     /// <param name="product"> product </param>
     /// <returns> product </returns>
     public async Task<ProductModel> CreateProduct(ProductModel product) => await _productRepository.ProductExist(product.IdProduct)
-            ? throw new ProductException(2)
+            ? throw new APIException(2)
             : await _productRepository.CreateProduct(product);
 
     /// <summary>
@@ -51,7 +51,7 @@ public class ProductService : IProductService
     /// <returns> product </returns>
     public async Task<ProductModel> UpdateProduct(ProductModel product) => await _productRepository.ProductExist(product.IdProduct)
             ? await _productRepository.UpdateProduct(product)
-            : throw new ProductException(3);
+            : throw new APIException(3);
 
     /// <summary>
     /// Delete product permanently
@@ -62,7 +62,7 @@ public class ProductService : IProductService
     {
         if (!await _productRepository.ProductExist(idProduct))
         {
-            throw new ProductException(4);
+            throw new APIException(4);
         }
         else
         {

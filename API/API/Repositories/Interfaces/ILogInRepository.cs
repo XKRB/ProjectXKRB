@@ -1,6 +1,8 @@
 ﻿// <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
 // </summary>
+using API.Models;
+
 namespace API.Repositories.Interfaces;
 
 /// <summary>
@@ -8,18 +10,17 @@ namespace API.Repositories.Interfaces;
 /// </summary>
 public interface ILogInRepository
 {
-    ///// <summary>
-    ///// To register new login
-    ///// </summary>
-    ///// <param name="userId">User´s Id</param>
-    ///// <param name="jti">token id</param>
-    ///// <param name="token">token</param>
-    ///// <returns>Task</returns>
-    //public Task RegisterLogIn(string userId, string jti, string token);
+    /// <summary>
+    /// Verify if the USerName exist
+    /// </summary>
+    /// <param name="userName"></param>
+    /// <returns></returns>
+    Task<bool> AuthenticateUser(string userName, string userPassword);
 
-    ///// <summary>
-    ///// Release database allocate resources
-    ///// </summary>
-    ///// <returns>Task</returns>
-    //Task Dispose();
+    /// <summary>
+    /// Register new User Login
+    /// </summary>
+    /// <param name="userLogin"></param>
+    /// <returns></returns>
+    Task LoginUser(LogInModel userLogin);
 }

@@ -13,12 +13,19 @@ builder.Services.AddSwaggerGen();
 /// This method gets called by the runtime. Use this method to add services to the container.
 /// </summary>
 
+
+
+
+
+
 //Conection to data base
 DatabaseConfigure.ConfigureService(builder.Services, builder);
 //Dependency Injection
 DependencyInjectionConfigure.ConfigureService(builder.Services);
 //Globalization Configure service
 GlobalizationConfigure.ConfigureService(builder.Services);
+
+
 
 WebApplication app = builder.Build();
 

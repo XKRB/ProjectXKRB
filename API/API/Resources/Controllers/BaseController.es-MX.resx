@@ -133,4 +133,20 @@
     <value>El producto no existe, no puede ser eliminado</value>
     <comment>004</comment>
   </data>
+  <data name="5" xml:space="preserve">
+    <value>El producto fue eliminado </value>
+    <comment>005</comment>
+  </data>
+  <data name="6" xml:space="preserve">
+    <value>Login Correcto</value>
+    <comment>006</comment>
+  </data>
+  <data name="7" xml:space="preserve">
+    <value>Login Incorrecto</value>
+    <comment>007</comment>
+  </data>
+  <data name="8" xml:space="preserve">
+    <value>El usuario no existe</value>
+    <comment>008</comment>
+  </data>
 </root>

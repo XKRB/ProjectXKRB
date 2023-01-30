@@ -9,7 +9,7 @@ namespace API.General.Classes;
 /// <summary>
 /// Product exception 
 /// </summary>
-public class ProductException : Exception
+public class APIException : Exception
 {
     /// <summary>
     /// Message Id
@@ -44,9 +44,9 @@ public class ProductException : Exception
     /// <summary>
     /// Constructor
     /// </summary>
-    public ProductException() { }
+    public APIException() { }
 
-    public ProductException(int idMessage, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
+    public APIException(int idMessage, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
     {
         _idMessage = idMessage;
         _statusCode = statusCode;
