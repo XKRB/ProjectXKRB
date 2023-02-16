@@ -21,103 +21,110 @@ namespace API.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class LoginController :  BaseController
+public class LoginController :  ControllerBase
 {
-    /// <summary>
-    /// Manage product busines logic
-    /// </summary>
-    private readonly ILogInService _loginService;
+    private readonly IConfiguration _config;
 
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <param name="productService"></param>
-    public LoginController(ILogInService loginService, IStringLocalizer<BaseController> localizer): base(localizer)
+    public LoginController(IConfiguration config)
     {
-        _loginService = loginService;   
+        _config = config;
     }
+    ///// <summary>
+    ///// Manage product busines logic
+    ///// </summary>
+    //private readonly ILogInService _loginService;
 
-    
-
-
-    //[HttpPost]
-    //public IActionResult Login (LogInModel userLogin)
+    ///// <summary>
+    ///// Constructor
+    ///// </summary>
+    ///// <param name="productService"></param>
+    //public LoginController(ILogInService loginService, IStringLocalizer<BaseController> localizer): base(localizer)
     //{
-    //    var user = Authenticate(userLogin);
-
-    //    if (user != null)
-    //    {
-    //        var token = GenerateToken(user);
-    //        return Ok(token);
-    //    }
-    //    return NotFound("User Not found");
+    //    _loginService = loginService;   
     //}
+
+
+
 
     [HttpPost]
-    public async Task<IActionResult> AuthenticateUser (LogInModel userlogin)
+    public IActionResult Login(LogInModel userLogin)
     {
-        try
-        {
-            //return Ok(await _loginService.AuthenticateUser(userlogin));
+        var user = Authenticate(userLogin);
 
-            var user = await _logInService.AuthenticateUser(userlogin);
-            //UserModel user = await _logInService.AuthenticateUser(userlogin.UserName, userlogin.UserPassword);
-
-            if (user != null)
-            {
-                //var token = await _logInService.GenerateToken();
-                return Ok(/*token*/);
-            }
-            return NotFound("User Not found");
-        }
-        catch (APIException)
+        if (user != null)
         {
-            return BadRequest(new Request(7).GetActionResult());
+            var token = GenerateToken(user);
+            return Ok(token);
         }
-        catch(Exception e)
-        {
-            return BadRequest(e.Message);
-        }
+        return NotFound("User Not found");
     }
 
-
-    [HttpGet]
-    public async Task<IActionResult> GenerateToken()
-    {
-        var token = await _loginService.GenerateToken();
-        return Ok(token);
-    }
-    //private UserModel Authenticate(LogInModel userLogin)
+    //[HttpPost]
+    //public async Task<IActionResult> AuthenticateUser (LogInModel userlogin)
     //{
-    //    //método para Autenticar al usuario
-    //    var currectUser = UserConstants.Users.FirstOrDefault(user => user.UserName.ToLower() == userLogin.UserName.ToLower() && user.UserPassword == userLogin.UserPassword);
-    //    if (currectUser != null)
+    //    try
     //    {
-    //        return currectUser;
+    //        //return Ok(await _loginService.AuthenticateUser(userlogin));
+
+    //        var user = await _logInService.AuthenticateUser(userlogin);
+    //        //UserModel user = await _logInService.AuthenticateUser(userlogin.UserName, userlogin.UserPassword);
+
+    //        if (user != null)
+    //        {
+    //            //var token = await _logInService.GenerateToken();
+    //            return Ok(/*token*/);
+    //        }
+    //        return NotFound("User Not found");
     //    }
-    //    return null;
-    //}
-
-    //private string GenerateToken(UserModel user)
-    //{
-    //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["jwt:key"]));
-    //    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-    //    var claims = new[]
+    //    catch (APIException)
     //    {
-    //        new Claim(ClaimTypes.NameIdentifier, user.UserName),
-    //        new Claim(ClaimTypes.Email, user.UserEmail),
-    //        new Claim(ClaimTypes.GivenName, user.UserFirstName),
-    //        new Claim(ClaimTypes.Surname, user.UserLastName)
-    //    };
-
-    //    var tokem = new JwtSecurityToken(
-    //        _config["Jwt:Issuer"],
-    //        _config["Jwt:Audience"],
-    //        claims,
-    //        expires: DateTime.Now.AddMinutes(15),
-    //        signingCredentials: credentials);
-
-    //    return new JwtSecurityTokenHandler().WriteToken(tokem);
+    //        return BadRequest(new Request(7).GetActionResult());
+    //    }
+    //    catch(Exception e)
+    //    {
+    //        return BadRequest(e.Message);
+    //    }
     //}
+
+
+    //[HttpGet]
+    //public async Task<IActionResult> GenerateToken()
+    //{
+    //    var token = await _loginService.GenerateToken();
+    //    return Ok(token);
+    //}
+
+    private UserModel Authenticate(LogInModel userLogin)
+    {
+        //método para Autenticar al usuario
+        var currectUser = UserConstants.Users.FirstOrDefault(user => user.UserName.ToLower() == userLogin.UserName.ToLower() && user.UserPassword == userLogin.UserPassword);
+        if (currectUser != null)
+        {
+            return currectUser;
+        }
+        return null;
+    }
+
+    private string GenerateToken(UserModel user)
+    {
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["jwt:key"]));
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+        var claims = new[]
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.UserName),
+            new Claim(ClaimTypes.Email, user.UserEmail),
+            new Claim(ClaimTypes.GivenName, user.UserFirstName),
+            new Claim(ClaimTypes.Surname, user.UserLastName)
+        };
+
+        var tokem = new JwtSecurityToken(
+            _config["Jwt:Issuer"],
+            _config["Jwt:Audience"],
+            claims,
+            expires: DateTime.Now.AddMinutes(15),
+            signingCredentials: credentials);
+
+        return new JwtSecurityTokenHandler().WriteToken(tokem);
+    }
 }
