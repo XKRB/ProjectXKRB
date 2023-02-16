@@ -21,78 +21,90 @@ namespace API.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class LoginController : ControllerBase /*: BaseController*/
+public class LoginController :  BaseController
 {
-    private readonly IConfiguration _config;
-    public LoginController(IConfiguration config)
+    /// <summary>
+    /// Manage product busines logic
+    /// </summary>
+    private readonly ILogInService _loginService;
+
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="productService"></param>
+    public LoginController(ILogInService loginService, IStringLocalizer<BaseController> localizer): base(localizer)
     {
-        _config = config;
+        _loginService = loginService;   
     }
 
-    //private readonly ILogInService _logInService;
-    //public LoginController(ILogInService logInService, IStringLocalizer<BaseController> localizer): base(localizer) => _logInService = logInService;
+    //private readonly IConfiguration _config;
+    //public LoginController(IConfiguration config)
+    //{
+    //    _config = config;
+    //}
+
+
+    //[HttpPost]
+    //public IActionResult Login (LogInModel userLogin)
+    //{
+    //    var user = Authenticate(userLogin);
+
+    //    if (user != null)
+    //    {
+    //        var token = GenerateToken(user);
+    //        return Ok(token);
+    //    }
+    //    return NotFound("User Not found");
+    //}
 
     [HttpPost]
-    public IActionResult Login (LogInModel userLogin)
+    public async Task<ActionResult<LogInModel>> AuthenticateUser (LogInModel userlogin)
     {
-        var user = Authenticate(userLogin);
-
-        if (user != null)
+        try
         {
-            var token = GenerateToken(user);
-            return Ok(token);
+            return Ok( await _loginService.AuthenticateUser( userlogin));
         }
-        return NotFound("User Not found");
-    }
-
-    private UserModel Authenticate(LogInModel userLogin)
-    {
-        var currectUser = UserConstants.Users.FirstOrDefault(user => user.UserName.ToLower() == userLogin.UserName.ToLower() && user.UserPassword == userLogin.UserPassword);
-        if (currectUser != null)
+        catch (APIException)
         {
-            return currectUser;
+            return BadRequest(new Request(7).GetActionResult());
         }
-        return null;
-    }
-
-    private string GenerateToken(UserModel user)
-    {
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["jwt:key"]));
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-        var claims = new[]
+        catch(Exception e)
         {
-            new Claim(ClaimTypes.NameIdentifier, user.UserName),
-            new Claim(ClaimTypes.Email, user.UserEmail),
-            new Claim(ClaimTypes.GivenName, user.UserFirstName),
-            new Claim(ClaimTypes.Surname, user.UserLastName)
-        };
-
-        var tokem = new JwtSecurityToken(
-            _config["Jwt:Issuer"],
-            _config["Jwt:Audience"],
-            claims,
-            expires: DateTime.Now.AddMinutes(15),
-            signingCredentials: credentials);
-
-        return new JwtSecurityTokenHandler().WriteToken(tokem);
+            return BadRequest(e.Message);
+        }
     }
-    //public async Task<ActionResult> LoginUser(LogInModel userLogin)
+
+    //private UserModel Authenticate(LogInModel userLogin)
     //{
-    //    try
+    //    //método para Autenticar al usuario
+    //    var currectUser = UserConstants.Users.FirstOrDefault(user => user.UserName.ToLower() == userLogin.UserName.ToLower() && user.UserPassword == userLogin.UserPassword);
+    //    if (currectUser != null)
     //    {
-    //        await _logInService.LoginUser(userLogin);
-    //        return Ok(new Request(6).GetActionResult());
+    //        return currectUser;
     //    }
-    //    catch(APIException)
-    //    {
-    //        //return BadRequest(new Request(7).GetActionResult());
-    //        return NotFound(new Request(7).GetActionResult());
+    //    return null;
+    //}
 
-    //    }
-    //    catch (Exception e)
+    //private string GenerateToken(UserModel user)
+    //{
+    //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["jwt:key"]));
+    //    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+    //    var claims = new[]
     //    {
-    //        return BadRequest(e.Message);
-    //    }
+    //        new Claim(ClaimTypes.NameIdentifier, user.UserName),
+    //        new Claim(ClaimTypes.Email, user.UserEmail),
+    //        new Claim(ClaimTypes.GivenName, user.UserFirstName),
+    //        new Claim(ClaimTypes.Surname, user.UserLastName)
+    //    };
+
+    //    var tokem = new JwtSecurityToken(
+    //        _config["Jwt:Issuer"],
+    //        _config["Jwt:Audience"],
+    //        claims,
+    //        expires: DateTime.Now.AddMinutes(15),
+    //        signingCredentials: credentials);
+
+    //    return new JwtSecurityTokenHandler().WriteToken(tokem);
     //}
 }

@@ -1,8 +1,10 @@
-﻿using API.General.Classes;
+﻿using API.Context.Context;
+using API.General.Classes;
 using API.Models;
 using API.Repositories.Classes;
 using API.Repositories.Interfaces;
 using API.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -12,17 +14,17 @@ namespace API.Services.Classes;
 /// <summary>
 /// LogIn Service
 /// </summary>
-public class LogInService /*: ILogInService*/
+public class LogInService : ILogInService
 {
-    ///// <summary>
-    ///// To manage data from the logIn table
-    ///// </summary>
-    //private readonly ILogInRepository _logInRepository;
+    /// <summary>
+    /// To manage data from the logIn table
+    /// </summary>
+    private readonly ILogInRepository _logInRepository;
 
-    ///// <summary>
-    ///// Parameters are passed via dependency injection to query tables
-    ///// </summary>
-    //public LogInService(ILogInRepository logInRepository) => _logInRepository = logInRepository;
+    /// <summary>
+    /// Parameters are passed via dependency injection to query tables
+    /// </summary>
+    public LogInService(ILogInRepository logInRepository) => _logInRepository = logInRepository;
 
     ///// <summary>
     ///// 
@@ -46,7 +48,19 @@ public class LogInService /*: ILogInService*/
     //    await _logInRepository.LoginUser(userLogin);
     //}
 
-
+    public async Task<ActionResult<LogInModel>> AuthenticateUser(LogInModel userlogin)
+    {
+        return await _logInRepository.AuthenticateUser(userlogin);
+        //if ( await _logInRepository.AuthenticateUser(userlogin))
+        //{
+        //    throw new APIException(8);
+        //}
+        //else
+        //{
+        //    return await _logInRepository.AuthenticateUser(userlogin);
+        //}
+        
+    }
 
     //public async Task LogInUser(LogInModel userlogin) => await _logInRepository.AuthenticateUser(userName, userPassword)
     //    ? throw new APIException(2)

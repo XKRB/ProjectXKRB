@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -15,6 +16,6 @@ public interface ILogInService
     /// </summary>
     /// <param name="userLogin"> Username and password </param>
     /// <returns> task </returns>
-    Task LoginUser(LogInModel userLogin);
+    Task<ActionResult<LogInModel>> AuthenticateUser(LogInModel userlogin);
 
 }

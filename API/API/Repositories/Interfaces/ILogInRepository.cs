@@ -2,6 +2,7 @@
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
 // </summary>
 using API.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Repositories.Interfaces;
 
@@ -15,12 +16,12 @@ public interface ILogInRepository
     /// </summary>
     /// <param name="userName"></param>
     /// <returns></returns>
-    Task<bool> AuthenticateUser(string userName, string userPassword);
+    Task<ActionResult<LogInModel>> AuthenticateUser(LogInModel userlogin);
 
-    /// <summary>
-    /// Register new User Login
-    /// </summary>
-    /// <param name="userLogin"></param>
-    /// <returns></returns>
-    Task LoginUser(LogInModel userLogin);
+    //    /// <summary>
+    //    /// Register new User Login
+    //    /// </summary>
+    //    /// <param name="userLogin"></param>
+    //    /// <returns></returns>
+    //    Task LoginUser(LogInModel userLogin);
 }
