@@ -11,22 +11,24 @@ public class LogInModel
     /// <summary>
     /// User Name
     /// </summary>
-    private string _userName;
-
-    /// <summary>
-    /// User Password 
-    /// </summary>
-    private string _userpassword;
-
-    /// <summary>
-    /// User Name
-    /// </summary>
-    public string UserName { get => _userName; set => _userName = value; }
+    public string UserName { get; set; }
 
     /// <summary>
     /// User Password
     /// </summary>
-    public string UserPassword { get => _userpassword; set => _userpassword = value; }
+    public string UserPassword { get; set; }
+
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="userName"></param>
+    /// <param name="userPassword"></param>
+    public LogInModel(string userName, string userPassword)
+    {
+        UserName = userName;
+        UserPassword = userPassword;
+    }
+
 
 
 
@@ -87,12 +89,12 @@ public class LogInModel
     ///// </summary>
     //public LogInModel() { }
 
-    ///// <summary>
-    ///// Constructor
-    ///// </summary>
-    ///// <param name="userId">users´s id</param>
-    ///// <param name="jwtId">session token</param>
-    ///// <param name="token">token</param>
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="userId">users´s id</param>
+    /// <param name="jwtId">session token</param>
+    /// <param name="token">token</param>
     //public LogInModel(string userId, string jwtId, string token)
     //{
     //    _userId = userId;

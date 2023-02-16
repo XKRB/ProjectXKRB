@@ -9,7 +9,7 @@ namespace API.General.Classes;
 /// <summary>
 /// Manage constants
 /// </summary>
-public class ProductConstants
+public class Constants
 {
 
     public const string Resources = "Resources";
@@ -24,8 +24,8 @@ public class ProductConstants
 
         public static List<UserModel> Users = new List<UserModel>()
         {
-            new UserModel() {UserName= "XKRB", UserPassword="123", UserFirstName="Karla", UserLastName="Ramos Benitez"},
-            new UserModel() {UserName="admin", UserPassword="123", UserFirstName="Karla", UserLastName="Ramos"}
+            new UserModel() {UserName = "XKRB", UserPassword = "123", UserEmail = "karla@gmail.com", UserFirstName = "Karla", UserLastName = "Ramos Benitez"},
+            new UserModel() {UserName = "admin", UserPassword = "123", UserEmail = "Ramos@gmail.com", UserFirstName = "Karla", UserLastName = "Ramos Venegas"}
         };
     }
 

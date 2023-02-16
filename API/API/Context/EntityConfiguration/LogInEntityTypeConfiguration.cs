@@ -13,7 +13,7 @@ public class LogInEntityTypeConfiguration : IEntityTypeConfiguration<LogInModel>
     /// <param name="builder"></param>
     public void Configure(EntityTypeBuilder<LogInModel> builder)
     {
-        _ = builder.ToTable(ProductConstants.TableNames.LogIns);
+        _ = builder.ToTable(Constants.TableNames.LogIns);
         _ = builder.HasKey(key => new { key.UserName});
 
         //Configure the properties

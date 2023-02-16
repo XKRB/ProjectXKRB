@@ -2,8 +2,11 @@
 using API.General.Classes;
 using API.Models;
 using API.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using static API.General.Classes.Constants;
 
 namespace API.Repositories.Classes;
 // <summary>
@@ -25,38 +28,41 @@ public class LogInRepository : ILogInRepository
     /// </summary>
     public LogInRepository(LogInContext logInContext) => _logInContext = logInContext;
 
-    /// <summary>
-    /// Verify if the USerName exist
-    /// </summary>
-    /// <param name="userName"> UserName </param>
-    /// <returns></returns>
-    public async Task<bool> AuthenticateUser(string userName, string userPassword) => await _logInContext.LogIns.AnyAsync(user => user.UserName.ToLower() == userName.ToLower() && user.UserPassword == userPassword);
-
-    /// <summary>
-    /// Register new User Login
-    /// </summary>
-    /// <param name="userLogin">UserName and Password </param>
-    /// <returns></returns>
-    public async Task LoginUser(LogInModel userLogin)
+    public async Task<ActionResult<LogInModel>> AuthenticateUser(LogInModel userlogin)
     {
-        await _logInContext.LogIns.AddAsync(userLogin);
-        await _logInContext.SaveChangesAsync();
+        LogInModel log = await _logInContext.LogIns.FirstOrDefaultAsync(user => user.UserName.ToLower() == userlogin.UserName.ToLower() && user.UserPassword == userlogin.UserPassword);
+        if (!await _logInContext.LogIns.AnyAsync(user => user.UserName == userlogin.UserName && user.UserPassword == userlogin.UserPassword))
+        {
+            throw new APIException(7);
+        }
+        else
+        {
+            return log;
+        }
+        //public async Task AuthenticateUser(LogInModel userlogin) => await _logInContext.LogIns.AnyAsync(user => user.UserName.ToLower() == userName.ToLower() && user.UserPassword == userPassword);
+        
+        
+        
+        //LogInModel log = new await _logInContext.LogIns.FirstOrDefaultAsync(user => user.UserName == userlogin.UserName);
+        ////var DBcheck = UserConstants.Users.FirstOrDefault(user => user.UserName.ToLower() == userlogin.UserName.ToLower() && user.UserPassword == userlogin.UserPassword);
+        //if (log != null)
+        //{
+        //    return ;
+        //}
+        //else
+        //{
+        //    return null;
+        //}
 
+
+        //if (await _logInContext.LogIns.FirstOrDefaultAsync(user => user.UserName == userlogin.UserName))
+        //{
+        //    throw new APIException(7);
+        //}
+        //else
+        //{
+        //    return Ok;
+        //}
+        //return await _logInContext.LogIns.FirstOrDefault(user => user.UserName == userlogin.UserName && user.UserPassword == userlogin.UserPassword);
     }
-
-
-    ///// <summary>
-    ///// To register new login
-    ///// </summary>
-    ///// <param name="userId">User´s Id</param>
-    ///// <param name="Jti">Token id</param>
-    ///// <param name="token">Token</param>
-    ///// <returns>Task</returns>
-    //public async Task RegisterLogIn(string userId, string Jti, string token)
-    //{
-    //    LogInModel LogInEntity = new LogInModel(userId, Jti, token);
-
-    //    _ = await _logInContext.AddAsync(LogInEntity);
-    //    _ = await _logInContext.SaveChangesAsync();
-    //}
 }

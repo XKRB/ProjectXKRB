@@ -26,7 +26,7 @@ public class ProductController : BaseController
     /// </summary>
     /// <param name="productService"></param>
     public ProductController(IProductService productService, IStringLocalizer<BaseController> localizer) : base(localizer) => _productService = productService;
-
+    
     /// <summary>
     /// Get product data
     /// </summary>
