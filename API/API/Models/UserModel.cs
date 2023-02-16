@@ -19,6 +19,11 @@ public class UserModel
     private string _userPassword;
 
     /// <summary>
+    /// User Email
+    /// </summary>
+    private string _userEmail;
+
+    /// <summary>
     /// User FirstName
     /// </summary>
     private string _userFirstName;
@@ -37,6 +42,11 @@ public class UserModel
     /// User Password
     /// </summary>
     public string UserPassword { get => _userPassword;set => _userPassword = value; }
+
+    /// <summary>
+    /// User Password
+    /// </summary>
+    public string UserEmail { get => _userEmail; set => _userEmail = value; }
 
     /// <summary>
     /// User FirstName

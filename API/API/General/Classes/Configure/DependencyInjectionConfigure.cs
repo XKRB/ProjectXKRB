@@ -22,7 +22,7 @@ public class DependencyInjectionConfigure
         _ = services.AddScoped<IProductService, ProductService>();
         _ = services.AddScoped<IProductRepository, ProductRepository>();
 
-        _ = services.AddScoped<ILogInRepository, LogInRepository>();
-        _ = services.AddScoped<ILogInService, LogInService>();
+        //_ = services.AddScoped<ILogInRepository, LogInRepository>();
+        //_ = services.AddScoped<ILogInService, LogInService>();
     }
 }

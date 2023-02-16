@@ -11,22 +11,12 @@ public class LogInModel
     /// <summary>
     /// User Name
     /// </summary>
-    private string _userName;
-
-    /// <summary>
-    /// User Password 
-    /// </summary>
-    private string _userpassword;
-
-    /// <summary>
-    /// User Name
-    /// </summary>
-    public string UserName { get => _userName; set => _userName = value; }
+    public string UserName { get; set; }
 
     /// <summary>
     /// User Password
     /// </summary>
-    public string UserPassword { get => _userpassword; set => _userpassword = value; }
+    public string UserPassword { get; set; }
 
 
 

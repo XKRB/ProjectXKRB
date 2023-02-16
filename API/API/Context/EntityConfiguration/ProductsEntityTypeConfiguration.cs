@@ -19,7 +19,7 @@ public class ProductsEntityTypeConfiguration : IEntityTypeConfiguration<ProductM
     /// <param name="builder"></param>
     public void Configure(EntityTypeBuilder<ProductModel> builder)
     {
-        _ = builder.ToTable(ProductConstants.TableNames.Products);
+        _ = builder.ToTable(Constants.TableNames.Products);
         _ = builder.HasKey(x => x.IdProduct);
         _ = builder.Property(property => property.ProductName);
         _ = builder.Property(property => property.ProductPrice);

@@ -20,7 +20,7 @@ public class GlobalizationConfigure
     /// <param name="services"></param>
     public static void ConfigureService(IServiceCollection services)
     {
-        _ = services.AddLocalization(options => { options.ResourcesPath = ProductConstants.Resources; });
+        _ = services.AddLocalization(options => { options.ResourcesPath = Constants.Resources; });
         _ = services.AddControllers();
         _ = services.AddMvc(a => a.EnableEndpointRouting = false)
             .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
@@ -31,10 +31,10 @@ public class GlobalizationConfigure
            {
                List<CultureInfo> supportedCultures = new List<CultureInfo>
                {
-                    new CultureInfo(ProductConstants.enUS),
-                    new CultureInfo(ProductConstants.esMX),
+                    new CultureInfo(Constants.enUS),
+                    new CultureInfo(Constants.esMX),
                };
-               opts.DefaultRequestCulture = new RequestCulture(ProductConstants.enUS);
+               opts.DefaultRequestCulture = new RequestCulture(Constants.enUS);
                //Formating numbers, dates, etc.
                opts.SupportedCultures = supportedCultures;
                //UI strings that we have localazed
@@ -51,13 +51,13 @@ public class GlobalizationConfigure
         //Globalization
         CultureInfo[] supportedCultures = new[]
         {
-                new CultureInfo(ProductConstants.enUS),
-                new CultureInfo(ProductConstants.esMX),
+                new CultureInfo(Constants.enUS),
+                new CultureInfo(Constants.esMX),
             };
 
         _ = app.UseRequestLocalization(new RequestLocalizationOptions
         {
-            DefaultRequestCulture = new RequestCulture(ProductConstants.esMX),
+            DefaultRequestCulture = new RequestCulture(Constants.esMX),
             // Formatting numbers, dates, etc.
             SupportedCultures = supportedCultures,
             // UI strings that we have localized.

@@ -12,39 +12,39 @@ namespace API.Services.Classes;
 /// <summary>
 /// LogIn Service
 /// </summary>
-public class LogInService : ILogInService
+public class LogInService /*: ILogInService*/
 {
-    /// <summary>
-    /// To manage data from the logIn table
-    /// </summary>
-    private readonly ILogInRepository _logInRepository;
+    ///// <summary>
+    ///// To manage data from the logIn table
+    ///// </summary>
+    //private readonly ILogInRepository _logInRepository;
 
-    /// <summary>
-    /// Parameters are passed via dependency injection to query tables
-    /// </summary>
-    public LogInService(ILogInRepository logInRepository) => _logInRepository = logInRepository;
+    ///// <summary>
+    ///// Parameters are passed via dependency injection to query tables
+    ///// </summary>
+    //public LogInService(ILogInRepository logInRepository) => _logInRepository = logInRepository;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="userLogin"></param>
-    /// <returns></returns>
-    /// 
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    ///// <param name="userLogin"></param>
+    ///// <returns></returns>
+    ///// 
+    ////public async Task LoginUser(LogInModel userLogin)
+    ////{
+    ////    if ( await _logInRepository.AuthenticateUser(userLogin.UserName, userLogin.UserPassword) == false)
+    ////    {
+    ////        throw new APIException(7);
+    ////    }
+    ////    else
+    ////    {
+    ////        await _logInRepository.LoginUser(userLogin);
+    ////    }
+    ////}
     //public async Task LoginUser(LogInModel userLogin)
     //{
-    //    if ( await _logInRepository.AuthenticateUser(userLogin.UserName, userLogin.UserPassword) == false)
-    //    {
-    //        throw new APIException(7);
-    //    }
-    //    else
-    //    {
-    //        await _logInRepository.LoginUser(userLogin);
-    //    }
+    //    await _logInRepository.LoginUser(userLogin);
     //}
-    public async Task LoginUser(LogInModel userLogin)
-    {
-        await _logInRepository.LoginUser(userLogin);
-    }
 
 
 

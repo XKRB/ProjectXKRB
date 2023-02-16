@@ -13,36 +13,36 @@ namespace API.Repositories.Classes;
 /// <summary>
 /// Interface LogIn Repository
 /// </summary>
-public class LogInRepository : ILogInRepository
+public class LogInRepository /*: ILogInRepository*/
 {
-    /// <summary>
-    /// To query logs tables
-    /// </summary>
-    private readonly LogInContext _logInContext;
+    ///// <summary>
+    ///// To query logs tables
+    ///// </summary>
+    //private readonly LogInContext _logInContext;
 
-    /// <summary>
-    /// Parameters are passed via dependency injection to query tables
-    /// </summary>
-    public LogInRepository(LogInContext logInContext) => _logInContext = logInContext;
+    ///// <summary>
+    ///// Parameters are passed via dependency injection to query tables
+    ///// </summary>
+    //public LogInRepository(LogInContext logInContext) => _logInContext = logInContext;
 
-    /// <summary>
-    /// Verify if the USerName exist
-    /// </summary>
-    /// <param name="userName"> UserName </param>
-    /// <returns></returns>
-    public async Task<bool> AuthenticateUser(string userName, string userPassword) => await _logInContext.LogIns.AnyAsync(user => user.UserName.ToLower() == userName.ToLower() && user.UserPassword == userPassword);
+    ///// <summary>
+    ///// Verify if the USerName exist
+    ///// </summary>
+    ///// <param name="userName"> UserName </param>
+    ///// <returns></returns>
+    //public async Task<bool> AuthenticateUser(string userName, string userPassword) => await _logInContext.LogIns.AnyAsync(user => user.UserName.ToLower() == userName.ToLower() && user.UserPassword == userPassword);
 
-    /// <summary>
-    /// Register new User Login
-    /// </summary>
-    /// <param name="userLogin">UserName and Password </param>
-    /// <returns></returns>
-    public async Task LoginUser(LogInModel userLogin)
-    {
-        await _logInContext.LogIns.AddAsync(userLogin);
-        await _logInContext.SaveChangesAsync();
+    ///// <summary>
+    ///// Register new User Login
+    ///// </summary>
+    ///// <param name="userLogin">UserName and Password </param>
+    ///// <returns></returns>
+    //public async Task LoginUser(LogInModel userLogin)
+    //{
+    //    await _logInContext.LogIns.AddAsync(userLogin);
+    //    await _logInContext.SaveChangesAsync();
 
-    }
+    //}
 
 
     ///// <summary>
