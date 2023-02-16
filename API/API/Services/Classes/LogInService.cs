@@ -5,6 +5,10 @@ using API.Repositories.Classes;
 using API.Repositories.Interfaces;
 using API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 // <summary>
 // Developer....: Karla Ramos Benitez       USER ID: XKRB
@@ -21,10 +25,13 @@ public class LogInService : ILogInService
     /// </summary>
     private readonly ILogInRepository _logInRepository;
 
+    private readonly IConfiguration _config;
+
     /// <summary>
     /// Parameters are passed via dependency injection to query tables
     /// </summary>
-    public LogInService(ILogInRepository logInRepository) => _logInRepository = logInRepository;
+    public LogInService(ILogInRepository logInRepository, IConfiguration config) => _logInRepository = logInRepository;
+
 
     ///// <summary>
     ///// 
@@ -61,18 +68,26 @@ public class LogInService : ILogInService
         //}
         
     }
+    public async Task<string> GenerateToken(/*LogInModel user*/)
+    {
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["jwt:key"]));
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-    //public async Task LogInUser(LogInModel userlogin) => await _logInRepository.AuthenticateUser(userName, userPassword)
-    //    ? throw new APIException(2)
-    //    : await _logInRepository.AuthenticateUser(product);
+        //var claims = new[]
+        //{
+        //    new Claim(ClaimTypes.NameIdentifier, user.UserName),
+        //    //new Claim(ClaimTypes.Email, user.UserEmail),
+        //    //new Claim(ClaimTypes.GivenName, user.UserFirstName),
+        //    //new Claim(ClaimTypes.Surname, user.UserLastName)
+        //};
 
+        var tokem = new JwtSecurityToken(
+            _config["Jwt:Issuer"],
+            _config["Jwt:Audience"],
+            //claims,
+            expires: DateTime.Now.AddMinutes(15),
+            signingCredentials: credentials);
 
-    //if (!await _logInRepository.AuthenticateUser(userLogin))
-    //{
-    //    throw new APIException(8);
-    //}
-    //else
-    //{
-    //    throw new APIException(6);
-    //}
+        return new JwtSecurityTokenHandler().WriteToken(tokem);
+    }
 }

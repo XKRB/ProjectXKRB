@@ -37,11 +37,7 @@ public class LoginController :  BaseController
         _loginService = loginService;   
     }
 
-    //private readonly IConfiguration _config;
-    //public LoginController(IConfiguration config)
-    //{
-    //    _config = config;
-    //}
+    
 
 
     //[HttpPost]
@@ -58,11 +54,21 @@ public class LoginController :  BaseController
     //}
 
     [HttpPost]
-    public async Task<ActionResult<LogInModel>> AuthenticateUser (LogInModel userlogin)
+    public async Task<IActionResult> AuthenticateUser (LogInModel userlogin)
     {
         try
         {
-            return Ok( await _loginService.AuthenticateUser( userlogin));
+            //return Ok(await _loginService.AuthenticateUser(userlogin));
+
+            var user = await _logInService.AuthenticateUser(userlogin);
+            //UserModel user = await _logInService.AuthenticateUser(userlogin.UserName, userlogin.UserPassword);
+
+            if (user != null)
+            {
+                //var token = await _logInService.GenerateToken();
+                return Ok(/*token*/);
+            }
+            return NotFound("User Not found");
         }
         catch (APIException)
         {
@@ -74,6 +80,13 @@ public class LoginController :  BaseController
         }
     }
 
+
+    [HttpGet]
+    public async Task<IActionResult> GenerateToken()
+    {
+        var token = await _loginService.GenerateToken();
+        return Ok(token);
+    }
     //private UserModel Authenticate(LogInModel userLogin)
     //{
     //    //método para Autenticar al usuario

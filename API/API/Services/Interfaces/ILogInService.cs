@@ -18,4 +18,10 @@ public interface ILogInService
     /// <returns> task </returns>
     Task<ActionResult<LogInModel>> AuthenticateUser(LogInModel userlogin);
 
+    /// <summary>
+    ///  Generate Token
+    /// </summary>
+    /// <param name="userLogin"> Username and password </param>
+    /// <returns> task </returns>
+    Task<string> GenerateToken();
 }

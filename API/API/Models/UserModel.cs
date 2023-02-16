@@ -8,7 +8,7 @@ namespace API.Models;
 /// </summary>
 public class UserModel
 {
-        /// <summary>
+    /// <summary>
     /// UserName
     /// </summary>
     private string _userName;
@@ -36,12 +36,12 @@ public class UserModel
     /// <summary>
     /// UserName
     /// </summary>
-    public string UserName { get => _userName;set => _userName = value; }
+    public string UserName { get => _userName; set => _userName = value; }
 
     /// <summary>
     /// User Password
     /// </summary>
-    public string UserPassword { get => _userPassword;set => _userPassword = value; }
+    public string UserPassword { get => _userPassword; set => _userPassword = value; }
 
     /// <summary>
     /// User Password
@@ -70,10 +70,10 @@ public class UserModel
     /// <param name="IdUSer"></param>
     /// <param name="UserName"></param>
     /// <param name="Password"></param>
-    public UserModel(string userName, string userPassword, string userFirstName, string userLastName )
+    public UserModel(string userName, string userPassword, string userFirstName, string userLastName)
     {
         _userName = userName;
-        _userPassword= userPassword;
+        _userPassword = userPassword;
         _userFirstName = userFirstName;
         _userLastName = userLastName;
     }
