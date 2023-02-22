@@ -33,39 +33,10 @@ public class LogInService : ILogInService
     public LogInService(ILogInRepository logInRepository, IConfiguration config) => _logInRepository = logInRepository;
 
 
-    ///// <summary>
-    ///// 
-    ///// </summary>
-    ///// <param name="userLogin"></param>
-    ///// <returns></returns>
-    ///// 
-    ////public async Task LoginUser(LogInModel userLogin)
-    ////{
-    ////    if ( await _logInRepository.AuthenticateUser(userLogin.UserName, userLogin.UserPassword) == false)
-    ////    {
-    ////        throw new APIException(7);
-    ////    }
-    ////    else
-    ////    {
-    ////        await _logInRepository.LoginUser(userLogin);
-    ////    }
-    ////}
-    //public async Task LoginUser(LogInModel userLogin)
-    //{
-    //    await _logInRepository.LoginUser(userLogin);
-    //}
 
     public async Task<ActionResult<LogInModel>> AuthenticateUser(LogInModel userlogin)
     {
         return await _logInRepository.AuthenticateUser(userlogin);
-        //if ( await _logInRepository.AuthenticateUser(userlogin))
-        //{
-        //    throw new APIException(8);
-        //}
-        //else
-        //{
-        //    return await _logInRepository.AuthenticateUser(userlogin);
-        //}
         
     }
     public async Task<string> GenerateToken(/*LogInModel user*/)

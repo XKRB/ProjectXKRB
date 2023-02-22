@@ -24,5 +24,7 @@ public class DependencyInjectionConfigure
 
         _ = services.AddScoped<ILogInRepository, LogInRepository>();
         _ = services.AddScoped<ILogInService, LogInService>();
+
+        _ = services.AddScoped<TokenService>();
     }
 }
